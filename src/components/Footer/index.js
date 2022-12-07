@@ -1,0 +1,48 @@
+import React from "react";
+import { GithubLogo, LinkedinLogo, TwitterLogo } from "phosphor-react";
+
+const Footer = () => {
+  return (
+    <footer>
+      <div className="fixed bottom-0 bg-primary w-full flex flex-row items-center justify-start gap-20 h-20 md:px-48 lg:px-64">
+        <div className="flex flex-row items-center justify-between gap-5 text-main">
+          <p className="text-xs">Made with ♥ by Alina!</p>
+          <a href="https://github.com/alshei" target="_blank">
+            <div>
+              <GithubLogo size="1.5rem" />
+            </div>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/alina-sheikh-a59a4518a/"
+            target="_blank"
+          >
+            <div>
+              <LinkedinLogo size="1.5rem" />
+            </div>
+          </a>
+
+          <a href="https://twitter.com/wymlky" target="_blank">
+            <div>
+              <TwitterLogo size="1.5rem" />
+            </div>
+          </a>
+        </div>
+
+        <div className="flex flex-row items-center justify-between gap-5 text-accent">
+          <a href="https://github.com/alshei/notepad-v2" target="_blank">
+            <p className="text-xs">Repository</p>
+          </a>
+          <a href="https://www.jetbrains.com/lp/mono/" target="_blank">
+            <p className="text-xs">Fonts</p>
+          </a>
+          <a href="https://phosphoricons.com/" target="_blank">
+            <p className="text-xs">Icons</p>
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
