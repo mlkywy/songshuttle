@@ -10,13 +10,14 @@ function App() {
 
   useEffect(() => {
     /*
-     * determine the user's theme preferences
-     * if they have used the site before, it will be stored in local storage
-     * if not, we will use their computer's default dark/light settings
+     * Determine the user's theme preferences
+     * If they have used the site before, it will be stored in local storage
+     * If not, we will use their computer's default dark/light settings
      */
     if (theme === null) {
       const localStorageTheme = localStorage.getItem("theme-choice");
       const userDefaultDark = window.matchMedia("(prefers-color-scheme:dark)");
+
       if (localStorageTheme) {
         setTheme(localStorageTheme !== "default" ? localStorageTheme : "");
       } else {
@@ -38,7 +39,6 @@ function App() {
           }
         >
           <Header />
-
           <Home />
           <Footer />
         </div>

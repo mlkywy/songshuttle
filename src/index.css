@@ -66,21 +66,3 @@ code {
   font-family: "Inter";
   font-size: 14px;
 }
-
-.current {
-  background-color: rgba(175, 175, 175, 0.3);
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-}
-
-.correct {
-  background-color: rgba(0, 255, 60, 0.3);
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-}
-
-.incorrect {
-  background-color: rgba(255, 0, 0, 0.3);
-  border-radius: 0.2rem;
-  padding: 0.1rem;
-}
