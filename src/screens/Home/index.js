@@ -1,4 +1,4 @@
-import { Primary } from "../../components/Buttons";
+import { Primary, NavLink } from "../../components/Buttons";
 import { useEffect, useState } from "react";
 import Playlist from "../../components/Playlist";
 import SearchResults from "../../components/SearchResults";
@@ -33,6 +33,7 @@ const Home = () => {
   const logout = () => {
     setToken("");
     window.localStorage.removeItem("token");
+    handleSearch();
   };
 
   const getUserId = async () => {
@@ -53,9 +54,17 @@ const Home = () => {
   const [songs, setSongs] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [visibility, setVisibility] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
+
+    if (!token) {
+      setQuery("");
+      setResults([]);
+      return;
+    }
+
     const { data } = await axios.get("https://api.spotify.com/v1/search", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -78,8 +87,8 @@ const Home = () => {
     setSongs(songs.filter((song, i) => i !== index));
   };
 
-  const createPlaylist = async (title, description, songIds) => {
-    if (title == null || songIds.length == 0) {
+  const createPlaylist = async (title, description, songIds, visibility) => {
+    if (title == null || songIds.length == 0 || visibility == false) {
       console.log(
         "Make sure the title field is not empty and include at least one song!"
       );
@@ -94,7 +103,7 @@ const Home = () => {
         {
           name: title,
           description: description,
-          public: false,
+          public: visibility,
         },
         {
           headers: {
@@ -118,7 +127,7 @@ const Home = () => {
         }
       );
 
-      console.log(title, description, songIds, user_id, response);
+      console.log(title, description, songIds, user_id, response, visibility);
     } catch (error) {
       console.error(error);
     }
@@ -136,11 +145,11 @@ const Home = () => {
           )}&response_type=${RESPONSE_TYPE}`}
         />
       ) : (
-        <Primary option="Logout" onClick={logout} />
+        <Primary option="Logout of Spotify" onClick={logout} />
       )}
 
-      <div className="flex flex-col items-center justify-center p-4">
-        <form onSubmit={handleSearch}>
+      <div className="flex flex-row items-center w-1/2 justify-between gap-5">
+        <form onSubmit={handleSearch} className="flex-1 mr-4">
           <input
             className="border rounded p-2"
             type="text"
@@ -155,6 +164,27 @@ const Home = () => {
             Search
           </button>
         </form>
+
+        <button
+          className="px-4 py-2 text-sm font-medium text-white bg-indigo-500 border-0 rounded-full focus:outline-none focus:shadow-outline"
+          onClick={() => {
+            setVisibility(!visibility);
+          }}
+        >
+          {visibility ? "Show on profile" : "Don't show on profile"}
+        </button>
+
+        <NavLink
+          option="Create playlist"
+          onClick={() =>
+            createPlaylist(
+              title,
+              description,
+              songs.map((song) => `spotify:track:${song.songId}`),
+              visibility
+            )
+          }
+        />
       </div>
 
       <div className="flex flex-row items-center justify-center w-screen h-1/2 gap-10">
@@ -165,18 +195,6 @@ const Home = () => {
           setTitle={setTitle}
           setDescription={setDescription}
         />
-
-        <button
-          onClick={() =>
-            createPlaylist(
-              title,
-              description,
-              songs.map((song) => "spotify:track:" + song.songId)
-            )
-          }
-        >
-          Create playlist
-        </button>
       </div>
     </div>
   );
