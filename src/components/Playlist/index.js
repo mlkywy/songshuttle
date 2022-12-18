@@ -31,7 +31,6 @@ const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
               className="w-10 h-10 rounded-full mr-4"
             />
             <div className="flex flex-col">
-              <div className="font-bold text-sm mb-2">{song.songId}</div>
               <div className="font-bold text-sm mb-2">{song.title}</div>
               <div className="text-gray-700 text-xs">{song.artist}</div>
             </div>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Playlist from "../../components/Playlist";
 import SearchResults from "../../components/SearchResults";
 import axios from "axios";
+import { MagnifyingGlass } from "phosphor-react";
 
 const REDIRECT_URI = "http://localhost:3000";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -88,7 +89,7 @@ const Home = () => {
   };
 
   const createPlaylist = async (title, description, songIds, visibility) => {
-    if (title == null || songIds.length == 0 || visibility == false) {
+    if (title === null || songIds.length === 0) {
       console.log(
         "Make sure the title field is not empty and include at least one song!"
       );
@@ -137,7 +138,7 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-10">
       {!token ? (
         <Primary
-          option="Login to Spotify"
+          option="login to spotify"
           link={`${AUTH_ENDPOINT}?client_id=${
             process.env.REACT_APP_CLIENT_ID
           }&redirect_uri=${REDIRECT_URI}&scope=${scopes.join(
@@ -145,46 +146,48 @@ const Home = () => {
           )}&response_type=${RESPONSE_TYPE}`}
         />
       ) : (
-        <Primary option="Logout of Spotify" onClick={logout} />
+        <Primary option="logout of spotify" onClick={logout} />
       )}
 
-      <div className="flex flex-row items-center w-1/2 justify-between gap-5">
-        <form onSubmit={handleSearch} className="flex-1 mr-4">
+      <div className="flex flex-row items-center w-1/2 justify-between">
+        <form onSubmit={handleSearch} className="flex">
           <input
-            className="border rounded p-2"
+            className="px-4 rounded focus:outline-none bg-primary text-white"
             type="text"
-            placeholder="Search for songs..."
+            placeholder="search for songs..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-primary hover:bg-secondary text-white font-bold p-4 rounded-full ml-5"
             type="submit"
           >
-            Search
+            <MagnifyingGlass size="1.5rem" />
           </button>
         </form>
 
-        <button
-          className="px-4 py-2 text-sm font-medium text-white bg-indigo-500 border-0 rounded-full focus:outline-none focus:shadow-outline"
-          onClick={() => {
-            setVisibility(!visibility);
-          }}
-        >
-          {visibility ? "Show on profile" : "Don't show on profile"}
-        </button>
+        <div className="flex flex-row gap-5">
+          <button
+            className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-secondary border-0 rounded-full focus:outline-none focus:shadow-outline"
+            onClick={() => {
+              setVisibility(!visibility);
+            }}
+          >
+            {visibility ? "show on profile" : "don't show on profile"}
+          </button>
 
-        <NavLink
-          option="Create playlist"
-          onClick={() =>
-            createPlaylist(
-              title,
-              description,
-              songs.map((song) => `spotify:track:${song.songId}`),
-              visibility
-            )
-          }
-        />
+          <NavLink
+            option="create playlist"
+            onClick={() =>
+              createPlaylist(
+                title,
+                description,
+                songs.map((song) => `spotify:track:${song.songId}`),
+                visibility
+              )
+            }
+          />
+        </div>
       </div>
 
       <div className="flex flex-row items-center justify-center w-screen h-1/2 gap-10">
