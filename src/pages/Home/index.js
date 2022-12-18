@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
-// Buttons
-import { Primary, NavLink } from "../../components/Buttons";
-
 // Components
+import { Primary, NavLink } from "../../components/Buttons";
 import Playlist from "../../components/Playlist";
 import SearchResults from "../../components/SearchResults";
 
