@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
 // Components
@@ -8,9 +8,11 @@ import SearchResults from "../../components/SearchResults";
 
 // API
 import getTracks from "../../api/getTracks";
-import getUser from "../../api/getUser";
 import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
+
+// Hooks
+import useUser from "../../hooks/useUser";
 
 // Constants
 import {
@@ -21,7 +23,7 @@ import {
 } from "../../api/constants";
 
 const Home = () => {
-  const [token, setToken] = useState("");
+  const [userId, token, logout] = useUser();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -33,30 +35,6 @@ const Home = () => {
     SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
     SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
   ];
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
-
-    if (!token && hash) {
-      token = hash
-        .substring(1)
-        .split("&")
-        .find((elem) => elem.startsWith("access_token"))
-        .split("=")[1];
-
-      window.location.hash = "";
-      window.localStorage.setItem("token", token);
-    }
-
-    setToken(token);
-  }, []);
-
-  const logout = () => {
-    setToken("");
-    window.localStorage.removeItem("token");
-    handleSearch();
-  };
 
   const addSong = (songId, cover, title, artist) => {
     setSongs([...songs, { songId, cover, title, artist }]);
@@ -93,10 +71,6 @@ const Home = () => {
       );
       return;
     }
-
-    // Get user ID
-    const user = await getUser(token);
-    const userId = user.id;
 
     // Create new playlist
     const response = await createPlaylist(
