@@ -17,6 +17,7 @@ export const NavLink = (props) => {
         <button
           className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold hover:bg-primary text-main"
           type={props.type}
+          onClick={props.onClick}
         >
           {props.option}
         </button>

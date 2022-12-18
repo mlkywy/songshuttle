@@ -1,17 +1,40 @@
-import { Primary, NavLink } from "../../components/Buttons";
 import { useEffect, useState } from "react";
-import Playlist from "../../components/Playlist";
-import SearchResults from "../../components/SearchResults";
-import axios from "axios";
 import { MagnifyingGlass } from "phosphor-react";
 
-const REDIRECT_URI = "http://localhost:3000";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const RESPONSE_TYPE = "token";
+// Buttons
+import { Primary, NavLink } from "../../components/Buttons";
+
+// Components
+import Playlist from "../../components/Playlist";
+import SearchResults from "../../components/SearchResults";
+
+// API
+import getTracks from "../../api/getTracks";
+import getUser from "../../api/getUser";
+import createPlaylist from "../../api/createPlaylist";
+import addTracksToPlaylist from "../../api/addTracksToPlaylist";
+
+// Constants
+import {
+  SPOTIFY_ENDPOINTS,
+  REDIRECT_URI,
+  RESPONSE_TYPE,
+  SPOTIFY_SCOPES,
+} from "../../api/constants";
 
 const Home = () => {
   const [token, setToken] = useState("");
-  const scopes = ["playlist-modify-private", "playlist-modify-public"];
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [songs, setSongs] = useState([]);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [visibility, setVisibility] = useState(false);
+
+  const scopes = [
+    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
+    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
+  ];
 
   useEffect(() => {
     const hash = window.location.hash;
@@ -37,25 +60,13 @@ const Home = () => {
     handleSearch();
   };
 
-  const getUserId = async () => {
-    try {
-      const response = await axios.get("https://api.spotify.com/v1/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data.id;
-    } catch (error) {
-      console.error(error);
-    }
+  const addSong = (songId, cover, title, artist) => {
+    setSongs([...songs, { songId, cover, title, artist }]);
   };
 
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [songs, setSongs] = useState([]);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [visibility, setVisibility] = useState(false);
+  const removeSong = (index) => {
+    setSongs(songs.filter((song, i) => i !== index));
+  };
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -66,29 +77,18 @@ const Home = () => {
       return;
     }
 
-    const { data } = await axios.get("https://api.spotify.com/v1/search", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        q: query,
-        type: "track",
-      },
-    });
-
-    console.log(data.tracks.items);
+    const data = await getTracks(query, token);
     setResults(data.tracks.items);
   };
 
-  const addSong = (songId, cover, title, artist) => {
-    setSongs([...songs, { songId, cover, title, artist }]);
-  };
+  const handleCreatePlaylist = async (
+    title,
+    description,
+    songIds,
+    visibility
+  ) => {
+    console.log(title, description, visibility, songIds);
 
-  const removeSong = (index) => {
-    setSongs(songs.filter((song, i) => i !== index));
-  };
-
-  const createPlaylist = async (title, description, songIds, visibility) => {
     if (title === null || songIds.length === 0) {
       console.log(
         "Make sure the title field is not empty and include at least one song!"
@@ -96,42 +96,24 @@ const Home = () => {
       return;
     }
 
-    const user_id = await getUserId();
+    // Get user ID
+    const user = await getUser(token);
+    const userId = user.id;
 
-    try {
-      const response = await axios.post(
-        `https://api.spotify.com/v1/users/${user_id}/playlists`,
-        {
-          name: title,
-          description: description,
-          public: visibility,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+    // Create new playlist
+    const response = await createPlaylist(
+      userId,
+      token,
+      title,
+      description,
+      visibility
+    );
 
-      const playlistId = response.data.id;
+    const playlistId = response.id;
 
-      // Add songs to the playlist
-      await axios.post(
-        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
-        {
-          uris: songIds,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(title, description, songIds, user_id, response, visibility);
-    } catch (error) {
-      console.error(error);
-    }
+    // Add songs to the playlist
+    await addTracksToPlaylist(token, playlistId, songIds);
+    console.log(title, description, songIds, userId, response, visibility);
   };
 
   return (
@@ -139,7 +121,7 @@ const Home = () => {
       {!token ? (
         <Primary
           option="login to spotify"
-          link={`${AUTH_ENDPOINT}?client_id=${
+          link={`${SPOTIFY_ENDPOINTS.AUTHORIZE}?client_id=${
             process.env.REACT_APP_CLIENT_ID
           }&redirect_uri=${REDIRECT_URI}&scope=${scopes.join(
             "%20"
@@ -179,7 +161,7 @@ const Home = () => {
           <NavLink
             option="create playlist"
             onClick={() =>
-              createPlaylist(
+              handleCreatePlaylist(
                 title,
                 description,
                 songs.map((song) => `spotify:track:${song.songId}`),
