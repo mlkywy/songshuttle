@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import Home from "./screens/Home";
 import { BrowserRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { ThemeContext } from "./helper/ThemeContext";
+import { ThemeContext } from "./utilities/ThemeContext";
 import Footer from "./components/Footer";
 
 function App() {

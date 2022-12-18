@@ -30,13 +30,21 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-row items-center justify-between gap-5 text-accent">
-          <a href="https://github.com/alshei/notepad-v2" target="_blank">
+          <a
+            href="https://github.com/alshei/notepad-v2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <p className="text-xs">Repository</p>
           </a>
-          <a href="https://www.jetbrains.com/lp/mono/" target="_blank">
+          <a
+            href="https://www.jetbrains.com/lp/mono/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <p className="text-xs">Fonts</p>
           </a>
-          <a href="https://phosphoricons.com/" target="_blank">
+          <a href="https://phosphoricons.com/" target="_blank" rel="noreferrer">
             <p className="text-xs">Icons</p>
           </a>
         </div>
