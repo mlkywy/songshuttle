@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import { Trash } from "phosphor-react";
 
-const Playlist = ({ songs, removeSong }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
+const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
   return (
     <div className="overflow-y-auto w-1/4 h-full bg-white rounded-lg shadow-lg">
       <div className="p-4 gap-2 flex flex-col items-center justify-between">
         <input
           type="text"
           placeholder="Enter playlist title"
-          value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full px-2 py-1 text-lg leading-tight text-gray-700 focus:outline-none focus:shadow-outline"
         />
         <textarea
           type="text"
           placeholder="Enter playlist description"
-          value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full px-2 py-1 text-sm leading-tight text-gray-700 focus:outline-none focus:shadow-outline"
         />

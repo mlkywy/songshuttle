@@ -40,16 +40,3 @@ const SearchResults = ({ results, addSong }) => {
 };
 
 export default SearchResults;
-
-//    <button
-//      className="text-sm"
-//      onClick={() =>
-//        addSong(
-//          result.name,
-//          result.artists[0].name,
-//          result.album.images[0].url
-//        )
-//      }
-//    >
-//      Add to Playlist
-//    </button>;
