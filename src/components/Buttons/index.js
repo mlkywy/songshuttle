@@ -32,7 +32,7 @@ export const Primary = (props) => {
       {props.link ? (
         <a href={props.link}>
           <button
-            className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold bg-accent shadow-accent shadow-sm hover:bg-highlight hover:shadow-highlight text-main"
+            className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold bg-accent hover:bg-highlight hover:shadow-highlight text-main"
             type={props.type}
           >
             {props.option}
@@ -40,7 +40,7 @@ export const Primary = (props) => {
         </a>
       ) : (
         <button
-          className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold bg-accent shadow-accent shadow-sm hover:bg-highlight hover:shadow-highlight text-main"
+          className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold bg-accent hover:bg-highlight hover:shadow-highlight text-main"
           type={props.type}
           onClick={props.onClick}
         >

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
 // Components
-import { Primary, NavLink } from "../../components/Buttons";
+import { NavLink } from "../../components/Buttons";
 import Playlist from "../../components/Playlist";
 import SearchResults from "../../components/SearchResults";
 
@@ -14,27 +14,14 @@ import addTracksToPlaylist from "../../api/addTracksToPlaylist";
 // Hooks
 import useUser from "../../hooks/useUser";
 
-// Constants
-import {
-  SPOTIFY_ENDPOINTS,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SPOTIFY_SCOPES,
-} from "../../api/constants";
-
 const Home = () => {
-  const { userId, token, logout } = useUser();
+  const { userId, token } = useUser();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [songs, setSongs] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(false);
-
-  const scopes = [
-    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
-    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
-  ];
 
   const addSong = (songId, cover, title, artist) => {
     setSongs([...songs, { songId, cover, title, artist }]);
@@ -90,19 +77,6 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center justify-center w-screen h-screen gap-10">
-      {!token ? (
-        <Primary
-          option="login to spotify"
-          link={`${SPOTIFY_ENDPOINTS.AUTHORIZE}?client_id=${
-            process.env.REACT_APP_CLIENT_ID
-          }&redirect_uri=${REDIRECT_URI}&scope=${scopes.join(
-            "%20"
-          )}&response_type=${RESPONSE_TYPE}&show_dialog=true`}
-        />
-      ) : (
-        <Primary option="logout of spotify" onClick={logout} />
-      )}
-
       <div className="flex flex-row items-center w-1/2 justify-between">
         <form onSubmit={handleSearch} className="flex">
           <input
