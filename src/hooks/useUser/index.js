@@ -34,7 +34,7 @@ const useUser = () => {
     localStorage.removeItem("token");
   };
 
-  return [userId, token, logout];
+  return { userId, token, logout };
 };
 
 export default useUser;

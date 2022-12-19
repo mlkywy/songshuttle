@@ -23,7 +23,7 @@ import {
 } from "../../api/constants";
 
 const Home = () => {
-  const [userId, token, logout] = useUser();
+  const { userId, token, logout } = useUser();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [songs, setSongs] = useState([]);
