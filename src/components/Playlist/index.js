@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Trash } from "phosphor-react";
 
 const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {

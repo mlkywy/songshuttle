@@ -97,7 +97,7 @@ const Home = () => {
             process.env.REACT_APP_CLIENT_ID
           }&redirect_uri=${REDIRECT_URI}&scope=${scopes.join(
             "%20"
-          )}&response_type=${RESPONSE_TYPE}`}
+          )}&response_type=${RESPONSE_TYPE}&show_dialog=true`}
         />
       ) : (
         <Primary option="logout of spotify" onClick={logout} />
