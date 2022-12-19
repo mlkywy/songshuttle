@@ -39,7 +39,7 @@ const Footer = () => {
             <p className="text-xs">Repository</p>
           </a>
           <a
-            href="https://www.jetbrains.com/lp/mono/"
+            href="https://fonts.google.com/specimen/Inter"
             target="_blank"
             rel="noopener noreferrer"
           >
