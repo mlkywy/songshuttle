@@ -7,13 +7,12 @@ const useUser = () => {
   const hash = window.location.hash;
 
   useEffect(() => {
+    console.log(userId);
+    console.log(token);
     const fetchData = async () => {
-      if (token && !userId) {
-        const user = await getUser(token);
-        setUserId(user?.id);
-      }
+      const user = await getUser(token);
+      setUserId(user?.id);
     };
-    fetchData();
 
     if (!token && hash) {
       const token = hash
@@ -26,12 +25,17 @@ const useUser = () => {
       window.localStorage.setItem("token", token);
       setToken(token);
     }
+
+    if (token && !userId) {
+      fetchData();
+    }
   }, [token, userId, hash]);
 
   const logout = () => {
     setToken(null);
     setUserId(null);
     localStorage.removeItem("token");
+    window.location.reload();
   };
 
   return { userId, token, logout };
