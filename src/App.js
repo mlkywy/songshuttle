@@ -34,6 +34,7 @@ function App() {
     dark: "theme-dark",
     light: "theme-light",
     custom1: "theme-custom1",
+    custom2: "theme-custom2",
   };
 
   return (

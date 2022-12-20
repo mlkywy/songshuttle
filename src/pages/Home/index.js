@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MagnifyingGlass, Square, CheckSquare } from "phosphor-react";
 
 // Components
-import { NavLink } from "../../components/Buttons";
+import { Secondary } from "../../components/Buttons";
 import Playlist from "../../components/Playlist";
 import SearchResults from "../../components/SearchResults";
 
@@ -85,14 +85,14 @@ const Home = () => {
       <div className="flex flex-row items-center w-1/2 justify-between">
         <form onSubmit={handleSearch} className="flex">
           <input
-            className="px-4 rounded focus:outline-none bg-accent placeholder-primary text-main font-medium"
+            className="flex px-5 py-3 rounded focus:outline-none bg-accent placeholder-primary text-main font-medium"
             type="text"
             placeholder="search for songs..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           <button
-            className="bg-primary hover:bg-accent text-highlight hover:text-main font-bold p-4 rounded-full ml-5"
+            className="bg-primary hover:bg-accent text-highlight hover:text-main font-bold p-3 rounded-full ml-5"
             type="submit"
           >
             <MagnifyingGlass size="1.5rem" />
@@ -101,7 +101,7 @@ const Home = () => {
 
         <div className="flex flex-row gap-5">
           <button
-            className="px-4 py-2 text-sm font-medium text-highlight hover:text-main bg-primary hover:bg-accent border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
+            className="px-5 py-3 text-sm font-medium text-highlight hover:text-main bg-primary hover:bg-accent border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
             onClick={() => {
               setVisibility(!visibility);
             }}
@@ -114,7 +114,7 @@ const Home = () => {
             show on profile
           </button>
 
-          <NavLink
+          <Secondary
             option="create playlist"
             onClick={() =>
               handleCreatePlaylist(

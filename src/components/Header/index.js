@@ -22,6 +22,7 @@ const options = [
   { label: "spaceship", value: "dark" },
   { label: "blossom", value: "light" },
   { label: "dreamy", value: "custom1" },
+  { label: "retro", value: "custom2" },
 ];
 
 const scopes = [
@@ -53,7 +54,7 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
-        <NavLink option="documentation" link="documentation" />
+        <NavLink option="how it works" link="about" />
         <div>
           <Dropdown options={options} />
         </div>
