@@ -19,7 +19,7 @@ function App() {
       const userDefaultDark = window.matchMedia("(prefers-color-scheme:dark)");
 
       if (localStorageTheme) {
-        setTheme(localStorageTheme !== "default" ? localStorageTheme : "");
+        setTheme(localStorageTheme !== "dark" ? localStorageTheme : "");
       } else {
         setTheme(() => (userDefaultDark ? "dark" : "light"));
       }
@@ -35,6 +35,8 @@ function App() {
               ? "theme-dark"
               : theme === "light"
               ? "theme-light"
+              : theme === "custom1"
+              ? "theme-custom1"
               : ""
           }
         >

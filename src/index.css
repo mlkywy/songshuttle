@@ -6,10 +6,10 @@
   :root {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #473450;
-    --secondary: #895b78;
-    --accent: #b26d79;
-    --highlight: #536fa3;
+    --primary: #211829;
+    --secondary: #38334f;
+    --accent: #5c527f;
+    --highlight: #686da1;
     background: radial-gradient(
       ellipse at 5% 5%,
       var(--secondary),
@@ -20,10 +20,10 @@
   .theme-dark {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #261c2c;
-    --secondary: #3e2c41;
+    --primary: #211829;
+    --secondary: #38334f;
     --accent: #5c527f;
-    --highlight: #6e85b2;
+    --highlight: #686da1;
     background: radial-gradient(
       ellipse at 5% 5%,
       var(--secondary),
@@ -32,12 +32,26 @@
   }
 
   .theme-light {
+    --main-text: #c24e4e;
+    --alternate-text: #000000;
+    --highlight: #fff2f2;
+    --primary: #e69393;
+    --secondary: #fad4d4;
+    --accent: #fcdcdc;
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom1 {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #f47c7c;
-    --secondary: #ef9f9f;
-    --accent: #fad4d4;
-    --highlight: #fff2f2;
+    --primary: #473450;
+    --secondary: #895b78;
+    --accent: #b26d79;
+    --highlight: #ffa3b3;
     background: radial-gradient(
       ellipse at 5% 5%,
       var(--secondary),

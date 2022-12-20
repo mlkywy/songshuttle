@@ -18,9 +18,9 @@ import {
 import useUser from "../../hooks/useUser";
 
 const options = [
-  { label: "dark", value: "dark" },
-  { label: "light", value: "light" },
-  { label: "default", value: "default" },
+  { label: "spaceship", value: "dark" },
+  { label: "blossom", value: "light" },
+  { label: "dreamy", value: "custom1" },
 ];
 
 const Header = () => {
