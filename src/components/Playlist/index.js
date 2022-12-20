@@ -15,7 +15,7 @@ const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
           type="text"
           placeholder="enter playlist description..."
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full px-2 py-1 text-sm font-medium border-b border-secondary leading-tight placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
+          className="w-full px-2 py-1 text-sm font-medium leading-tight placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
         />
       </div>
 
