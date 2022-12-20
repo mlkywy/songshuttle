@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Palette } from "phosphor-react";
-import { ThemeContext } from "../../context/ThemeContext";
 import ClickAwayListener from "react-click-away-listener";
+import { Palette } from "phosphor-react";
+
+// Context
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Dropdown = ({ options }) => {
   const [showOptions, setShowOptions] = useState(false);

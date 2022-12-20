@@ -1,8 +1,12 @@
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import { BrowserRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+
+// Context
 import { ThemeContext } from "./context/ThemeContext";
+
+// Components
+import Home from "./pages/Home";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
@@ -26,20 +30,16 @@ function App() {
     }
   }, [theme]);
 
+  const themeDictionary = {
+    dark: "theme-dark",
+    light: "theme-light",
+    custom1: "theme-custom1",
+  };
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <BrowserRouter>
-        <div
-          className={
-            theme === "dark"
-              ? "theme-dark"
-              : theme === "light"
-              ? "theme-light"
-              : theme === "custom1"
-              ? "theme-custom1"
-              : ""
-          }
-        >
+        <div className={themeDictionary[theme]}>
           <Header />
           <Home />
           <Footer />

@@ -17,19 +17,20 @@ import {
 // Hooks
 import useUser from "../../hooks/useUser";
 
+// Theme coptions
 const options = [
   { label: "spaceship", value: "dark" },
   { label: "blossom", value: "light" },
   { label: "dreamy", value: "custom1" },
 ];
 
+const scopes = [
+  SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
+  SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
+];
+
 const Header = () => {
   const { token, logout } = useUser();
-
-  const scopes = [
-    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
-    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
-  ];
 
   return (
     <div className="fixed w-full flex flex-row items-center justify-between text-main h-20 z-10 md:px-32 lg:px-64">
