@@ -99,3 +99,34 @@ code {
   font-family: "Inter";
   font-size: 14px;
 }
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--highlight) var(--primary);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--highlight);
+  border-radius: 20px;
+  border: 3px solid var(--primary);
+}
+
+::selection {
+  background: var(--highlight); /* WebKit/Blink Browsers */
+  color: var(--primary);
+}
+
+::-moz-selection {
+  background: var(--highlight); /* Gecko Browsers */
+  color: var(--primary);
+}
