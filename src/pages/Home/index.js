@@ -92,7 +92,7 @@ const Home = () => {
             onChange={(e) => setQuery(e.target.value)}
           />
           <button
-            className="bg-primary hover:bg-secondary text-accent hover:text-highlight font-bold p-4 rounded-full ml-5"
+            className="bg-primary hover:bg-secondary text-highlight hover:text-main font-bold p-4 rounded-full ml-5"
             type="submit"
           >
             <MagnifyingGlass size="1.5rem" />
