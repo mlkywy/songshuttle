@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MagnifyingGlass } from "phosphor-react";
+import { MagnifyingGlass, Square, CheckSquare } from "phosphor-react";
 
 // Components
 import { NavLink } from "../../components/Buttons";
@@ -101,12 +101,17 @@ const Home = () => {
 
         <div className="flex flex-row gap-5">
           <button
-            className="px-4 py-2 text-sm font-medium text-accent hover:text-highlight bg-primary hover:bg-secondary border-0 rounded-full focus:outline-none focus:shadow-outline"
+            className="px-4 py-2 text-sm font-medium text-highlight hover:text-main bg-primary hover:bg-secondary border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
             onClick={() => {
               setVisibility(!visibility);
             }}
           >
-            {visibility ? "show on profile" : "don't show on profile"}
+            {visibility ? (
+              <Square size="1.5rem" />
+            ) : (
+              <CheckSquare size="1.5rem" />
+            )}
+            show on profile
           </button>
 
           <NavLink
