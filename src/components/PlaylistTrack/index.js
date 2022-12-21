@@ -2,7 +2,7 @@ import React from "react";
 import { Trash } from "phosphor-react";
 
 const PlaylistTrack = ({ song, removeSong, index }) => {
-  const { id, cover, title, artist } = song;
+  const { cover, title, artist } = song;
 
   return (
     <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">

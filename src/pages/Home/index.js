@@ -107,9 +107,9 @@ const Home = () => {
             }}
           >
             {visibility ? (
-              <Square size="1.5rem" />
-            ) : (
               <CheckSquare size="1.5rem" />
+            ) : (
+              <Square size="1.5rem" />
             )}
             show on profile
           </button>
