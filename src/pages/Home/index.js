@@ -16,6 +16,8 @@ import useUser from "../../hooks/useUser";
 import getRelatedArtists from "../../api/getRelatedArtists";
 import getArtistTopTracks from "../../api/getArtistTopTracks";
 
+import getRandomElements from "../../utils/getRandomElements";
+
 const Home = () => {
   const { userId, token } = useUser();
   const [query, setQuery] = useState("");
@@ -57,8 +59,6 @@ const Home = () => {
     songIds,
     visibility
   ) => {
-    console.log(title, description, visibility, songIds);
-
     if (title === null || songIds.length === 0) {
       console.log(
         "Make sure the title field is not empty and include at least one song!"
@@ -79,22 +79,28 @@ const Home = () => {
 
     // Add songs to the playlist
     await addTracksToPlaylist(token, playlistId, songIds);
-    console.log(title, description, songIds, userId, response, visibility);
   };
 
   const handleSuggested = async (songId) => {
+    setQuery("");
     setResults([]);
 
     // Get related artist
     const relatedArtistsObject = await getRelatedArtists(token, songId);
     const relatedArtists = relatedArtistsObject.artists;
-    console.log(relatedArtists);
 
-    // Get related artist's top tracks
-    for (let i = 0; i < relatedArtists.length; i++) {
-      const artistId = relatedArtists[i].id;
-      console.log(await getArtistTopTracks(token, artistId));
-    }
+    // Get top tracks for each artist
+    const topTracksPromises = relatedArtists.map((artist) =>
+      getArtistTopTracks(token, artist.id)
+    );
+    const topTracksObjects = await Promise.all(topTracksPromises);
+
+    const allTracks = topTracksObjects.flatMap(
+      (topTracksObject) => topTracksObject.tracks
+    );
+
+    // Set results to a random selection of 20 tracks
+    setResults(getRandomElements(allTracks, 20));
   };
 
   return (
