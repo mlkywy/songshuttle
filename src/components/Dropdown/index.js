@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
-import { Palette } from "phosphor-react";
-import { ThemeContext } from "../../context/ThemeContext";
 import ClickAwayListener from "react-click-away-listener";
+import { Palette } from "phosphor-react";
+
+// Context
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Dropdown = ({ options }) => {
   const [showOptions, setShowOptions] = useState(false);
@@ -43,7 +45,7 @@ const Dropdown = ({ options }) => {
                   options.map((option) => (
                     <button
                       onClick={() => handleThemeOptions(option.value)}
-                      className="text-white px-4 py-2 text-sm hover:bg-secondary w-full flex"
+                      className="text-main font-medium px-4 py-2 text-sm hover:bg-secondary w-full flex"
                       role="menuitem"
                       tabIndex="-1"
                     >

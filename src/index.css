@@ -6,10 +6,11 @@
   :root {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #473450;
-    --secondary: #895b78;
-    --accent: #b26d79;
-    --highlight: #536fa3;
+    --primary: #211829;
+    --secondary: #38334f;
+    --accent: #5c527f;
+    --highlight: #686da1;
+
     background: radial-gradient(
       ellipse at 5% 5%,
       var(--secondary),
@@ -20,10 +21,11 @@
   .theme-dark {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #261c2c;
-    --secondary: #3e2c41;
+    --primary: #211829;
+    --secondary: #38334f;
     --accent: #5c527f;
-    --highlight: #6e85b2;
+    --highlight: #686da1;
+
     background: radial-gradient(
       ellipse at 5% 5%,
       var(--secondary),
@@ -32,12 +34,43 @@
   }
 
   .theme-light {
+    --main-text: #c24e4e;
+    --alternate-text: #000000;
+    --primary: #e69393;
+    --secondary: #fad4d4;
+    --accent: #fcdcdc;
+    --highlight: #fff2f2;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom1 {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #f47c7c;
-    --secondary: #ef9f9f;
-    --accent: #fad4d4;
-    --highlight: #fff2f2;
+    --primary: #473450;
+    --secondary: #895b78;
+    --accent: #b26d79;
+    --highlight: #ffa3b3;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom2 {
+    --main-text: #f4c095;
+    --alternate-text: #0b0835;
+    --primary: #091f29;
+    --secondary: #1d7874;
+    --accent: #679289;
+    --highlight: #db4244;
+
     background: radial-gradient(
       ellipse at 5% 5%,
       var(--secondary),
@@ -65,4 +98,35 @@ code {
 * {
   font-family: "Inter";
   font-size: 14px;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--highlight) var(--primary);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--highlight);
+  border-radius: 20px;
+  border: 3px solid var(--primary);
+}
+
+::selection {
+  background: var(--highlight); /* WebKit/Blink Browsers */
+  color: var(--primary);
+}
+
+::-moz-selection {
+  background: var(--highlight); /* Gecko Browsers */
+  color: var(--primary);
 }

@@ -1,8 +1,12 @@
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import { BrowserRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+
+// Context
 import { ThemeContext } from "./context/ThemeContext";
+
+// Components
+import Home from "./pages/Home";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
@@ -19,25 +23,24 @@ function App() {
       const userDefaultDark = window.matchMedia("(prefers-color-scheme:dark)");
 
       if (localStorageTheme) {
-        setTheme(localStorageTheme !== "default" ? localStorageTheme : "");
+        setTheme(localStorageTheme !== "dark" ? localStorageTheme : "");
       } else {
         setTheme(() => (userDefaultDark ? "dark" : "light"));
       }
     }
   }, [theme]);
 
+  const themeDictionary = {
+    dark: "theme-dark",
+    light: "theme-light",
+    custom1: "theme-custom1",
+    custom2: "theme-custom2",
+  };
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <BrowserRouter>
-        <div
-          className={
-            theme === "dark"
-              ? "theme-dark"
-              : theme === "light"
-              ? "theme-light"
-              : ""
-          }
-        >
+        <div className={themeDictionary[theme]}>
           <Header />
           <Home />
           <Footer />

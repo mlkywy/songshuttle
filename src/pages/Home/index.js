@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { MagnifyingGlass } from "phosphor-react";
+import { MagnifyingGlass, Square, CheckSquare } from "phosphor-react";
 
 // Components
-import { NavLink } from "../../components/Buttons";
+import { Secondary } from "../../components/Buttons";
 import Playlist from "../../components/Playlist";
 import SearchResults from "../../components/SearchResults";
 
@@ -33,6 +33,11 @@ const Home = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+
+    if (query === "") {
+      setResults([]);
+      return;
+    }
 
     if (!token) {
       setQuery("");
@@ -80,14 +85,14 @@ const Home = () => {
       <div className="flex flex-row items-center w-1/2 justify-between">
         <form onSubmit={handleSearch} className="flex">
           <input
-            className="px-4 rounded focus:outline-none bg-primary text-white"
+            className="flex px-5 py-3 rounded focus:outline-none bg-accent placeholder-primary text-main font-medium"
             type="text"
             placeholder="search for songs..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           <button
-            className="bg-primary hover:bg-secondary text-white font-bold p-4 rounded-full ml-5"
+            className="bg-primary hover:bg-accent text-highlight hover:text-main font-bold p-3 rounded-full ml-5"
             type="submit"
           >
             <MagnifyingGlass size="1.5rem" />
@@ -96,15 +101,20 @@ const Home = () => {
 
         <div className="flex flex-row gap-5">
           <button
-            className="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-secondary border-0 rounded-full focus:outline-none focus:shadow-outline"
+            className="px-5 py-3 text-sm font-medium text-highlight hover:text-main bg-primary hover:bg-accent border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
             onClick={() => {
               setVisibility(!visibility);
             }}
           >
-            {visibility ? "show on profile" : "don't show on profile"}
+            {visibility ? (
+              <Square size="1.5rem" />
+            ) : (
+              <CheckSquare size="1.5rem" />
+            )}
+            show on profile
           </button>
 
-          <NavLink
+          <Secondary
             option="create playlist"
             onClick={() =>
               handleCreatePlaylist(

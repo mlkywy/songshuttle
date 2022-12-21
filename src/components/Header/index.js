@@ -17,19 +17,21 @@ import {
 // Hooks
 import useUser from "../../hooks/useUser";
 
+// Theme coptions
 const options = [
-  { label: "dark", value: "dark" },
-  { label: "light", value: "light" },
-  { label: "default", value: "default" },
+  { label: "spaceship", value: "dark" },
+  { label: "blossom", value: "light" },
+  { label: "dreamy", value: "custom1" },
+  { label: "retro", value: "custom2" },
+];
+
+const scopes = [
+  SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
+  SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
 ];
 
 const Header = () => {
   const { token, logout } = useUser();
-
-  const scopes = [
-    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
-    SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
-  ];
 
   return (
     <div className="fixed w-full flex flex-row items-center justify-between text-main h-20 z-10 md:px-32 lg:px-64">
@@ -52,7 +54,7 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
-        <NavLink option="documentation" link="documentation" />
+        <NavLink option="how it works" link="about" />
         <div>
           <Dropdown options={options} />
         </div>

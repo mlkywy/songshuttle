@@ -7,7 +7,7 @@ export const NavLink = (props) => {
       {props.link ? (
         <Link to={props.link}>
           <button
-            className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold hover:bg-primary text-main"
+            className="flex items-center rounded-lg px-5 py-3 font-bold hover:bg-primary text-main"
             type={props.type}
           >
             {props.option}
@@ -15,7 +15,7 @@ export const NavLink = (props) => {
         </Link>
       ) : (
         <button
-          className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold hover:bg-primary text-main"
+          className="flex items-center rounded-lg px-5 py-3 font-bold hover:bg-primary text-main"
           type={props.type}
           onClick={props.onClick}
         >
@@ -32,7 +32,7 @@ export const Primary = (props) => {
       {props.link ? (
         <a href={props.link}>
           <button
-            className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold bg-accent hover:bg-highlight hover:shadow-highlight text-main"
+            className="flex items-center rounded-lg px-5 py-3 font-bold bg-accent hover:bg-secondary hover:shadow-highlight text-main"
             type={props.type}
           >
             {props.option}
@@ -40,7 +40,32 @@ export const Primary = (props) => {
         </a>
       ) : (
         <button
-          className="flex items-center rounded-lg pr-5 pl-5 pt-3 pb-3 font-bold bg-accent hover:bg-highlight hover:shadow-highlight text-main"
+          className="flex items-center rounded-lg px-5 py-3 font-bold bg-accent hover:bg-secondary hover:shadow-highlight text-main"
+          type={props.type}
+          onClick={props.onClick}
+        >
+          {props.option}
+        </button>
+      )}
+    </>
+  );
+};
+
+export const Secondary = (props) => {
+  return (
+    <>
+      {props.link ? (
+        <a href={props.link}>
+          <button
+            className="flex items-center rounded-lg px-5 py-3 font-bold bg-main hover:bg-highlight hover:shadow-highlight text-secondary hover:text-main"
+            type={props.type}
+          >
+            {props.option}
+          </button>
+        </a>
+      ) : (
+        <button
+          className="flex items-center rounded-lg px-5 py-3 font-bold bg-main hover:bg-highlight hover:shadow-highlight text-secondary hover:text-main"
           type={props.type}
           onClick={props.onClick}
         >
