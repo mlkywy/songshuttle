@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { MusicNotesPlus, PlayCircle, StopCircle } from "phosphor-react";
+import {
+  MusicNotesPlus,
+  PlayCircle,
+  PauseCircle,
+  StopCircle,
+} from "phosphor-react";
 
 const Track = ({ song, addSong }) => {
   console.log(song);
-  const { id, name, artists, album, preview_url } = song;
+
+  const { id, album, name, artists, preview_url } = song;
   const [isPlaying, setIsPlaying] = useState(false);
   const songAudio = useMemo(() => new Audio(preview_url), [preview_url]);
 
@@ -16,6 +22,11 @@ const Track = ({ song, addSong }) => {
     });
   };
 
+  const handlePause = () => {
+    setIsPlaying(false);
+    songAudio?.pause();
+  };
+
   const handleStop = () => {
     setIsPlaying(false);
     songAudio.currentTime = "0";
@@ -23,7 +34,7 @@ const Track = ({ song, addSong }) => {
   };
 
   return (
-    <div className="p-4 border-b border-secondary flex items-center justify-between">
+    <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">
       <div className="flex items-center w-5/6">
         <img
           src={album?.images[0]?.url}
@@ -45,16 +56,21 @@ const Track = ({ song, addSong }) => {
           onClick={() => handlePlay()}
         />
       ) : (
-        <StopCircle
+        <PauseCircle
           size="1.5rem"
-          className="text-highlight hover:text-main cursor-pointer"
-          onClick={() => handleStop()}
+          className="text-main hover:text-highlight cursor-pointer"
+          onClick={() => handlePause()}
         />
       )}
+      <StopCircle
+        size="1.5rem"
+        className="text-highlight hover:text-main cursor-pointer"
+        onClick={() => handleStop()}
+      />
       <MusicNotesPlus
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => addSong(song)}
+        onClick={() => addSong(id, album.images[0].url, name, artists[0].name)}
       />
     </div>
   );

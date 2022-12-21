@@ -1,5 +1,6 @@
 import React from "react";
 import { Trash } from "phosphor-react";
+import PlaylistTrack from "../PlaylistTrack";
 
 const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
   return (
@@ -20,29 +21,12 @@ const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
       </div>
 
       {songs.map((song, index) => (
-        <div
+        <PlaylistTrack
           key={song.id}
-          className="p-4 border-b border-secondary flex items-center justify-between"
-        >
-          <div className="flex items-center w-5/6">
-            <img
-              src={song.cover}
-              alt={`Cover art for ${song.title}`}
-              className="w-10 h-10 rounded-full mr-4"
-            />
-            <div className="flex flex-col">
-              <div className="font-bold text-main text-sm mb-2">
-                {song.title}
-              </div>
-              <div className="text-main text-xs font-medium">{song.artist}</div>
-            </div>
-          </div>
-          <Trash
-            size="1.5rem"
-            className="text-highlight hover:text-main cursor-pointer"
-            onClick={() => removeSong(index)}
-          />
-        </div>
+          song={song}
+          index={index}
+          removeSong={removeSong}
+        />
       ))}
     </div>
   );
