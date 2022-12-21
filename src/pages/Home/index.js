@@ -10,13 +10,10 @@ import SearchResults from "../../components/SearchResults";
 import getTracks from "../../api/getTracks";
 import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
+import getRecommendations from "../../api/getRecommendations";
 
 // Hooks
 import useUser from "../../hooks/useUser";
-import getRelatedArtists from "../../api/getRelatedArtists";
-import getArtistTopTracks from "../../api/getArtistTopTracks";
-
-import getRandomElements from "../../utils/getRandomElements";
 
 const Home = () => {
   const { userId, token } = useUser();
@@ -50,7 +47,9 @@ const Home = () => {
     }
 
     const data = await getTracks(query, token);
-    setResults(data.tracks.items);
+    const tracks = data.tracks.items;
+
+    setResults(tracks);
   };
 
   const handleCreatePlaylist = async (
@@ -67,7 +66,7 @@ const Home = () => {
     }
 
     // Create new playlist
-    const response = await createPlaylist(
+    const data = await createPlaylist(
       userId,
       token,
       title,
@@ -75,32 +74,20 @@ const Home = () => {
       visibility
     );
 
-    const playlistId = response.id;
+    const playlistId = data.id;
 
     // Add songs to the playlist
     await addTracksToPlaylist(token, playlistId, songIds);
   };
 
-  const handleSuggested = async (songId) => {
+  const handleRecs = async (songId) => {
     setQuery("");
     setResults([]);
 
-    // Get related artist
-    const relatedArtistsObject = await getRelatedArtists(token, songId);
-    const relatedArtists = relatedArtistsObject.artists;
+    const data = await getRecommendations(token, songId);
+    const tracks = data.tracks;
 
-    // Get top tracks for each artist
-    const topTracksPromises = relatedArtists.map((artist) =>
-      getArtistTopTracks(token, artist.id)
-    );
-    const topTracksObjects = await Promise.all(topTracksPromises);
-
-    const allTracks = topTracksObjects.flatMap(
-      (topTracksObject) => topTracksObject.tracks
-    );
-
-    // Set results to a random selection of 20 tracks
-    setResults(getRandomElements(allTracks, 20));
+    setResults(tracks);
   };
 
   return (
@@ -158,7 +145,7 @@ const Home = () => {
           removeSong={removeSong}
           setTitle={setTitle}
           setDescription={setDescription}
-          handleSuggested={handleSuggested}
+          handleRecs={handleRecs}
         />
       </div>
     </div>

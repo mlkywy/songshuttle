@@ -6,7 +6,7 @@ const Playlist = ({
   removeSong,
   setTitle,
   setDescription,
-  handleSuggested,
+  handleRecs,
 }) => {
   return (
     <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
@@ -31,7 +31,7 @@ const Playlist = ({
           song={song}
           index={index}
           removeSong={removeSong}
-          handleSuggested={handleSuggested}
+          handleRecs={handleRecs}
         />
       ))}
     </div>

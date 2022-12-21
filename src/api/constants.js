@@ -17,4 +17,5 @@ export const SPOTIFY_ENDPOINTS = {
     "https://api.spotify.com/v1/artists/:artistId/related-artists",
   GET_ARTIST_TOP_TRACKS:
     "https://api.spotify.com/v1/artists/:artistId/top-tracks",
+  GET_RECOMMENDATIONS: "https://api.spotify.com/v1/recommendations",
 };

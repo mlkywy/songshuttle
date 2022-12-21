@@ -1,8 +1,8 @@
 import React from "react";
 import { Trash, Sparkle } from "phosphor-react";
 
-const PlaylistTrack = ({ song, removeSong, index, handleSuggested }) => {
-  const { songId, artistId, cover, title, artist } = song;
+const PlaylistTrack = ({ song, removeSong, index, handleRecs }) => {
+  const { songId, cover, title, artist } = song;
 
   return (
     <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">
@@ -16,9 +16,8 @@ const PlaylistTrack = ({ song, removeSong, index, handleSuggested }) => {
       <Sparkle
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => handleSuggested(artistId)}
+        onClick={() => handleRecs(songId)}
       />
-
       <Trash
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
