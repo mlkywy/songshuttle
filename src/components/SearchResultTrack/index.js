@@ -15,6 +15,7 @@ const Track = ({ song, addSong }) => {
 
   const handlePlay = () => {
     setIsPlaying(true);
+    songAudio.volume = 0.2;
     songAudio?.play();
 
     songAudio.addEventListener("ended", (event) => {
