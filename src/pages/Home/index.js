@@ -86,11 +86,15 @@ const Home = () => {
     setResults([]);
 
     // Get related artist
-    const relatedArtist = await getRelatedArtists(token, songId);
-    console.log(relatedArtist);
+    const relatedArtistsObject = await getRelatedArtists(token, songId);
+    const relatedArtists = relatedArtistsObject.artists;
+    console.log(relatedArtists);
 
     // Get related artist's top tracks
-    // await getArtistTopTracks();
+    for (let i = 0; i < relatedArtists.length; i++) {
+      const artistId = relatedArtists[i].id;
+      console.log(await getArtistTopTracks(token, artistId));
+    }
   };
 
   return (
