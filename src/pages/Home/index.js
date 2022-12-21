@@ -10,6 +10,7 @@ import SearchResults from "../../components/SearchResults";
 import getTracks from "../../api/getTracks";
 import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
+import getRecommendations from "../../api/getRecommendations";
 
 // Hooks
 import useUser from "../../hooks/useUser";
@@ -23,8 +24,8 @@ const Home = () => {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(false);
 
-  const addSong = (songId, cover, title, artist) => {
-    setSongs([...songs, { songId, cover, title, artist }]);
+  const addSong = (songId, artistId, cover, title, artist) => {
+    setSongs([...songs, { songId, artistId, cover, title, artist }]);
   };
 
   const removeSong = (index) => {
@@ -46,7 +47,9 @@ const Home = () => {
     }
 
     const data = await getTracks(query, token);
-    setResults(data.tracks.items);
+    const tracks = data.tracks.items;
+
+    setResults(tracks);
   };
 
   const handleCreatePlaylist = async (
@@ -55,8 +58,6 @@ const Home = () => {
     songIds,
     visibility
   ) => {
-    console.log(title, description, visibility, songIds);
-
     if (title === null || songIds.length === 0) {
       console.log(
         "Make sure the title field is not empty and include at least one song!"
@@ -65,7 +66,7 @@ const Home = () => {
     }
 
     // Create new playlist
-    const response = await createPlaylist(
+    const data = await createPlaylist(
       userId,
       token,
       title,
@@ -73,11 +74,20 @@ const Home = () => {
       visibility
     );
 
-    const playlistId = response.id;
+    const playlistId = data.id;
 
     // Add songs to the playlist
     await addTracksToPlaylist(token, playlistId, songIds);
-    console.log(title, description, songIds, userId, response, visibility);
+  };
+
+  const handleRecs = async (songId) => {
+    setQuery("");
+    setResults([]);
+
+    const data = await getRecommendations(token, songId);
+    const tracks = data.tracks;
+
+    setResults(tracks);
   };
 
   return (
@@ -135,6 +145,7 @@ const Home = () => {
           removeSong={removeSong}
           setTitle={setTitle}
           setDescription={setDescription}
+          handleRecs={handleRecs}
         />
       </div>
     </div>

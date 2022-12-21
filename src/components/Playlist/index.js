@@ -1,7 +1,13 @@
 import React from "react";
 import PlaylistTrack from "../PlaylistTrack";
 
-const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
+const Playlist = ({
+  songs,
+  removeSong,
+  setTitle,
+  setDescription,
+  handleRecs,
+}) => {
   return (
     <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
       <div className="p-4 gap-2 flex flex-col items-center justify-between">
@@ -25,6 +31,7 @@ const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
           song={song}
           index={index}
           removeSong={removeSong}
+          handleRecs={handleRecs}
         />
       ))}
     </div>

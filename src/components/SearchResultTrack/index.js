@@ -15,7 +15,7 @@ const Track = ({ song, addSong }) => {
 
   const handlePlay = () => {
     setIsPlaying(true);
-    songAudio.volume = 0.2;
+    songAudio.volume = 0.5;
     songAudio?.play();
 
     songAudio.addEventListener("ended", (event) => {
@@ -71,7 +71,9 @@ const Track = ({ song, addSong }) => {
       <MusicNotesPlus
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => addSong(id, album.images[0].url, name, artists[0].name)}
+        onClick={() =>
+          addSong(id, artists[0].id, album.images[0].url, name, artists[0].name)
+        }
       />
     </div>
   );
