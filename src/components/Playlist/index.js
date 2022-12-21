@@ -1,5 +1,4 @@
 import React from "react";
-import { Trash } from "phosphor-react";
 import PlaylistTrack from "../PlaylistTrack";
 
 const Playlist = ({ songs, removeSong, setTitle, setDescription }) => {
