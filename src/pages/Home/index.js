@@ -13,6 +13,8 @@ import addTracksToPlaylist from "../../api/addTracksToPlaylist";
 
 // Hooks
 import useUser from "../../hooks/useUser";
+import getRelatedArtists from "../../api/getRelatedArtists";
+import getArtistTopTracks from "../../api/getArtistTopTracks";
 
 const Home = () => {
   const { userId, token } = useUser();
@@ -23,8 +25,8 @@ const Home = () => {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(false);
 
-  const addSong = (songId, cover, title, artist) => {
-    setSongs([...songs, { songId, cover, title, artist }]);
+  const addSong = (songId, artistId, cover, title, artist) => {
+    setSongs([...songs, { songId, artistId, cover, title, artist }]);
   };
 
   const removeSong = (index) => {
@@ -78,6 +80,17 @@ const Home = () => {
     // Add songs to the playlist
     await addTracksToPlaylist(token, playlistId, songIds);
     console.log(title, description, songIds, userId, response, visibility);
+  };
+
+  const handleSuggested = async (songId) => {
+    setResults([]);
+
+    // Get related artist
+    const relatedArtist = await getRelatedArtists(token, songId);
+    console.log(relatedArtist);
+
+    // Get related artist's top tracks
+    // await getArtistTopTracks();
   };
 
   return (
@@ -135,6 +148,7 @@ const Home = () => {
           removeSong={removeSong}
           setTitle={setTitle}
           setDescription={setDescription}
+          handleSuggested={handleSuggested}
         />
       </div>
     </div>

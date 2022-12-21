@@ -13,4 +13,8 @@ export const SPOTIFY_ENDPOINTS = {
   CREATE_PLAYLIST: "https://api.spotify.com/v1/users/:userId/playlists",
   ADD_TRACKS_TO_PLAYLIST:
     "https://api.spotify.com/v1/playlists/:playlistId/tracks",
+  GET_RELATED_ARTISTS:
+    "https://api.spotify.com/v1/artists/:artistId/related-artists",
+  GET_ARTIST_TOP_TRACKS:
+    "https://api.spotify.com/v1/artists/:artistId/top-tracks",
 };
