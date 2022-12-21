@@ -1,40 +1,23 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from 'react';
 import {
   MusicNotesPlus,
   PlayCircle,
   PauseCircle,
   StopCircle,
-} from "phosphor-react";
+} from 'phosphor-react';
+import { animated } from 'react-spring';
+import { usePlaylist } from '../../context/PlaylistContext';
 
-const Track = ({ song, addSong }) => {
-  console.log(song);
-
+const Track = ({ song, style, toggle, isPlaying }) => {
   const { id, album, name, artists, preview_url } = song;
-  const [isPlaying, setIsPlaying] = useState(false);
+  const { addToPlaylist } = usePlaylist();
   const songAudio = useMemo(() => new Audio(preview_url), [preview_url]);
 
-  const handlePlay = () => {
-    setIsPlaying(true);
-    songAudio?.play();
-
-    songAudio.addEventListener("ended", (event) => {
-      setIsPlaying(false);
-    });
-  };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-    songAudio?.pause();
-  };
-
-  const handleStop = () => {
-    setIsPlaying(false);
-    songAudio.currentTime = "0";
-    songAudio?.pause();
-  };
-
   return (
-    <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">
+    <animated.div
+      style={style}
+      className="p-4 border-b border-secondary flex items-center justify-between gap-2"
+    >
       <div className="flex items-center w-5/6">
         <img
           src={album?.images[0]?.url}
@@ -48,31 +31,30 @@ const Track = ({ song, addSong }) => {
           </div>
         </div>
       </div>
-
       {!isPlaying ? (
         <PlayCircle
           size="1.5rem"
           className="text-highlight hover:text-main cursor-pointer"
-          onClick={() => handlePlay()}
+          onClick={() => toggle()}
         />
       ) : (
         <PauseCircle
           size="1.5rem"
           className="text-main hover:text-highlight cursor-pointer"
-          onClick={() => handlePause()}
+          onClick={() => toggle()}
         />
       )}
-      <StopCircle
+      {/* <StopCircle
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
         onClick={() => handleStop()}
-      />
+      /> */}
       <MusicNotesPlus
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => addSong(id, album.images[0].url, name, artists[0].name)}
+        onClick={() => addToPlaylist(song)}
       />
-    </div>
+    </animated.div>
   );
 };
 

@@ -1,8 +1,10 @@
-import React from "react";
-import { Trash } from "phosphor-react";
+import React from 'react';
+import { Trash } from 'phosphor-react';
 
 const PlaylistTrack = ({ song, removeSong, index }) => {
-  const { cover, title, artist } = song;
+  const cover = song?.album.images[0].url;
+  const title = song?.name;
+  const artist = song?.artists[0]?.name;
 
   return (
     <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">
