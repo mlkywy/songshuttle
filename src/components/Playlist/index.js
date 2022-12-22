@@ -18,6 +18,7 @@ const Playlist = () => {
   } = usePlaylist();
   const { userId, token } = useUser();
   const [visibility, setVisibility] = useState(false);
+  const { updateSearchResultsWithRecs } = usePlaylist();
 
   const handleCreatePlaylist = async (
     title,
@@ -49,13 +50,13 @@ const Playlist = () => {
 
   const handleRecs = async (songId) => {
     // setInput("");
-    // setTracks([]);
+    updateSearchResultsWithRecs([]);
 
     const data = await getRecommendations(token, songId);
     const tracks = data.tracks;
     console.log(tracks);
 
-    // setTracks(tracks);
+    updateSearchResultsWithRecs(tracks);
   };
 
   return (

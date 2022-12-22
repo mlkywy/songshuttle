@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import useUser from "../../hooks/useUser";
 import getTracks from "../../api/getTracks";
 import SearchResults from "../SearchResults";
+import { usePlaylist } from "../../context/PlaylistContext";
 
 const Search = () => {
   const [input, setInput] = useState("");
@@ -17,10 +18,12 @@ const Search = () => {
       enabled: !!token || !!query,
     }
   );
+
+  const { recTracks, setRecTracks } = usePlaylist();
   const [tracks, setTracks] = useState(data?.tracks?.items);
 
   useEffect(() => {
-    if (input) {
+    if (input && !recTracks) {
       startTransition(() => {
         setQuery(input);
       });
@@ -29,13 +32,20 @@ const Search = () => {
     if (!input) {
       startTransition(() => {
         setTracks(() => []);
+        setRecTracks(null);
       });
     }
 
-    if (data?.tracks?.items && input) {
+    if (data?.tracks?.items && input && !recTracks) {
       setTracks(() => data?.tracks?.items);
     }
-  }, [input, query, data]);
+
+    if (recTracks) {
+      startTransition(() => {
+        setTracks(recTracks);
+      });
+    }
+  }, [input, query, data, recTracks]);
 
   return (
     <div className="w-1/3 flex flex-col items-center gap-6">
