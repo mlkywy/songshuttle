@@ -14,8 +14,9 @@ const TrackPlaceholder = () => (
       </div>
     </div>
     <div className="flex flex-row gap-3">
-      <div className="w-7 h-7 rounded-full bg-accent"></div>
-      <div className="w-7 h-7 rounded-lg bg-accent"></div>
+      <div className="w-6 h-6 rounded-full bg-accent"></div>
+      <div className="w-6 h-6 rounded-full bg-accent"></div>
+      <div className="w-6 h-6 rounded-lg bg-accent"></div>
     </div>
   </div>
 );
