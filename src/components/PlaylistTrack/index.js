@@ -1,8 +1,8 @@
 import React from "react";
-import { Trash } from "phosphor-react";
+import { Trash, Sparkle } from "phosphor-react";
 import { usePlaylist } from "../../context/PlaylistContext";
 
-const PlaylistTrack = ({ song, index }) => {
+const PlaylistTrack = ({ song, index, handleRecs }) => {
   const cover = song?.album.images[0].url;
   const title = song?.name;
   const artist = song?.artists[0]?.name;
@@ -18,11 +18,18 @@ const PlaylistTrack = ({ song, index }) => {
         </div>
       </div>
 
-      <Trash
-        size="1.5rem"
-        className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => removeFromPlaylist(index)}
-      />
+      <div className="flex flex-row gap-3">
+        <Sparkle
+          size="1.5rem"
+          className="text-highlight hover:text-main cursor-pointer"
+          onClick={() => handleRecs()}
+        />
+        <Trash
+          size="1.5rem"
+          className="text-highlight hover:text-main cursor-pointer"
+          onClick={() => removeFromPlaylist(index)}
+        />
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
 import useUser from "../../hooks/useUser";
 import { Square, CheckSquare } from "phosphor-react";
+import getRecommendations from "../../api/getRecommendations";
 
 const Playlist = () => {
   const {
@@ -46,6 +47,16 @@ const Playlist = () => {
     await addTracksToPlaylist(token, playlistId, songIds);
   };
 
+  const handleRecs = async (songId) => {
+    // setInput("");
+    // setTracks([]);
+
+    const data = await getRecommendations(token, songId);
+    const tracks = data.tracks;
+
+    // setTracks(tracks);
+  };
+
   return (
     <>
       <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
@@ -65,7 +76,12 @@ const Playlist = () => {
         </div>
 
         {songList.map((song, index) => (
-          <PlaylistTrack key={index} song={song} index={index} />
+          <PlaylistTrack
+            key={index}
+            song={song}
+            index={index}
+            handleRecs={handleRecs}
+          />
         ))}
       </div>
       <div className="flex flex-col gap-4">
