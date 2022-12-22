@@ -22,7 +22,7 @@ const PlaylistTrack = ({ song, index, handleRecs }) => {
         <Sparkle
           size="1.5rem"
           className="text-highlight hover:text-main cursor-pointer"
-          onClick={() => handleRecs()}
+          onClick={() => handleRecs(song.id)}
         />
         <Trash
           size="1.5rem"

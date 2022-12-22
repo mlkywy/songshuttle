@@ -53,6 +53,7 @@ const Playlist = () => {
 
     const data = await getRecommendations(token, songId);
     const tracks = data.tracks;
+    console.log(tracks);
 
     // setTracks(tracks);
   };
