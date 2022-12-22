@@ -52,9 +52,9 @@ const Search = () => {
         />
         <MagnifyingGlass
           className={`transition-all absolute w-18 text-main text-xl font-bold top-3.5 ${
-            isFocus ? "left-[95%]" : "left-[85%]"
+            isFocus ? "left-[93%]" : "left-[83%]"
           }`}
-        />
+        />{" "}
       </div>
       <div className="w-full">
         {input ? (
