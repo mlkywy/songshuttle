@@ -1,20 +1,22 @@
-import React, { useMemo } from 'react';
-import SearchResultTrack from '../SearchResultTrack';
-import { useTransition } from 'react-spring';
-import useAudio from '../../hooks/useAudio';
-import { usePlaylist } from '../../context/PlaylistContext';
+import React, { useMemo } from "react";
+import SearchResultTrack from "../SearchResultTrack";
+import { useTransition } from "react-spring";
+import useAudio from "../../hooks/useAudio";
+import { usePlaylist } from "../../context/PlaylistContext";
 
 const TrackPlaceholder = () => (
-  <div className="p-4 border-b border-secondary flex items-center justify-between gap-2 animate-pulse">
+  <div className="p-4 border-b border-secondary flex items-center justify-between animate-pulse">
     <div className="flex items-center w-5/6">
-      <div className="w-10 h-10 rounded-full mr-4 bg-accent"></div>
+      <div className="w-11 h-11 rounded-full mr-4 bg-accent"></div>
       <div className="flex flex-col">
         <div className="w-36 h-2 mb-2 rounded-full bg-accent"></div>
-        <div className="w-12 h-2 rounded-full bg-accent"></div>
+        <div className="w-13 h-2 rounded-full bg-accent"></div>
       </div>
     </div>
-    <div className="w-6 h-6 rounded-full bg-accent"></div>
-    <div className="w-6 h-6 rounded-lg bg-accent"></div>
+    <div className="flex flex-row gap-3">
+      <div className="w-7 h-7 rounded-full bg-accent"></div>
+      <div className="w-7 h-7 rounded-lg bg-accent"></div>
+    </div>
   </div>
 );
 
@@ -32,14 +34,15 @@ const SearchLoader = ({ amount }) => {
 
 const SearchResults = ({ results, addSong, isLoading }) => {
   const { songList } = usePlaylist();
-  const { playing, toggle, updateSource, currentTrack } = useAudio();
+  const { playing, toggle, resetAudio, updateSource, currentTrack } =
+    useAudio();
   const transitions = useTransition(results, {
-    from: { opacity: 0, transform: 'translateX(100%, 0, 0)' },
-    enter: { opacity: 1, transform: 'translateX(0%, 0, 0' },
+    from: { opacity: 0, transform: "translateX(100%, 0, 0)" },
+    enter: { opacity: 1, transform: "translateX(0%, 0, 0" },
     leave: { opacity: 1 },
   });
 
-  console.log('SONG LIST', songList);
+  console.log("SONG LIST", songList);
 
   if (isLoading) {
     return <SearchLoader amount={8} />;
@@ -59,6 +62,7 @@ const SearchResults = ({ results, addSong, isLoading }) => {
               ? toggle()
               : updateSource(item.preview_url, item.id)
           }
+          resetAudio={resetAudio}
         />
       ))}
     </div>

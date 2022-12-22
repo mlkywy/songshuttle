@@ -1,10 +1,12 @@
-import React from 'react';
-import { Trash } from 'phosphor-react';
+import React from "react";
+import { Trash } from "phosphor-react";
+import { usePlaylist } from "../../context/PlaylistContext";
 
-const PlaylistTrack = ({ song, removeSong, index }) => {
+const PlaylistTrack = ({ song, index }) => {
   const cover = song?.album.images[0].url;
   const title = song?.name;
   const artist = song?.artists[0]?.name;
+  const { removeFromPlaylist } = usePlaylist();
 
   return (
     <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">
@@ -19,7 +21,7 @@ const PlaylistTrack = ({ song, removeSong, index }) => {
       <Trash
         size="1.5rem"
         className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => removeSong(index)}
+        onClick={() => removeFromPlaylist(index)}
       />
     </div>
   );

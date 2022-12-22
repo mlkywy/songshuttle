@@ -32,7 +32,7 @@ export const Primary = (props) => {
       {props.link ? (
         <a href={props.link}>
           <button
-            className="flex items-center rounded-lg px-5 py-3 font-bold bg-accent hover:bg-secondary hover:shadow-highlight text-main"
+            className="flex items-center rounded-lg px-5 py-3 font-bold bg-accent hover:bg-secondary hover:shadow-highlight text-main justify-center"
             type={props.type}
           >
             {props.option}
@@ -40,7 +40,7 @@ export const Primary = (props) => {
         </a>
       ) : (
         <button
-          className="flex items-center rounded-lg px-5 py-3 font-bold bg-accent hover:bg-secondary hover:shadow-highlight text-main"
+          className="flex items-center rounded-lg px-5 py-3 font-bold bg-accent hover:bg-secondary hover:shadow-highlight text-main justify-center"
           type={props.type}
           onClick={props.onClick}
         >
@@ -57,7 +57,7 @@ export const Secondary = (props) => {
       {props.link ? (
         <a href={props.link}>
           <button
-            className="flex items-center rounded-lg px-5 py-3 font-bold bg-main hover:bg-highlight hover:shadow-highlight text-secondary hover:text-main"
+            className="flex items-center rounded-lg px-5 py-3 font-bold bg-main hover:bg-highlight hover:shadow-highlight text-secondary hover:text-main justify-center"
             type={props.type}
           >
             {props.option}
@@ -65,7 +65,7 @@ export const Secondary = (props) => {
         </a>
       ) : (
         <button
-          className="flex items-center rounded-lg px-5 py-3 font-bold bg-main hover:bg-highlight hover:shadow-highlight text-secondary hover:text-main"
+          className="flex items-center rounded-lg px-5 py-3 font-bold bg-main hover:bg-highlight hover:shadow-highlight text-secondary hover:text-main justify-center"
           type={props.type}
           onClick={props.onClick}
         >
@@ -73,5 +73,17 @@ export const Secondary = (props) => {
         </button>
       )}
     </>
+  );
+};
+
+export const ToggleButton = (props) => {
+  return (
+    <button
+      className="px-5 py-3 text-sm font-medium text-highlight hover:text-main bg-primary hover:bg-accent border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
+      type={props.type}
+      onClick={props.onClick}
+    >
+      {props.option}
+    </button>
   );
 };
