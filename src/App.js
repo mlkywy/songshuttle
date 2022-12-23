@@ -3,11 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 
 // Context
 import { ThemeContext } from "./context/ThemeContext";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Components
-import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import { PlaylistProvider } from "./context/PlaylistContext";
+import { SearchProvider } from "./context/SearchContext";
+import { AudioProvider } from "./context/AudioContext";
+
+const queryClient = new QueryClient();
 
 function App() {
   const [theme, setTheme] = useState(null);
@@ -39,13 +45,21 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <BrowserRouter>
-        <div className={themeDictionary[theme]}>
-          <Header />
-          <Home />
-          <Footer />
-        </div>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <PlaylistProvider>
+          <SearchProvider>
+            <AudioProvider>
+              <BrowserRouter>
+                <div className={themeDictionary[theme]}>
+                  <Header />
+                  <Home />
+                  <Footer />
+                </div>
+              </BrowserRouter>
+            </AudioProvider>
+          </SearchProvider>
+        </PlaylistProvider>
+      </QueryClientProvider>
     </ThemeContext.Provider>
   );
 }

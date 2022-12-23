@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
+import { animated } from "react-spring";
 import {
   MusicNotesPlus,
   PlayCircle,
@@ -6,36 +7,17 @@ import {
   StopCircle,
 } from "phosphor-react";
 
-const Track = ({ song, addSong }) => {
-  console.log(song);
+import { usePlaylist } from "../../context/PlaylistContext";
 
-  const { id, album, name, artists, preview_url } = song;
-  const [isPlaying, setIsPlaying] = useState(false);
-  const songAudio = useMemo(() => new Audio(preview_url), [preview_url]);
-
-  const handlePlay = () => {
-    setIsPlaying(true);
-    songAudio.volume = 0.5;
-    songAudio?.play();
-
-    songAudio.addEventListener("ended", (event) => {
-      setIsPlaying(false);
-    });
-  };
-
-  const handlePause = () => {
-    setIsPlaying(false);
-    songAudio?.pause();
-  };
-
-  const handleStop = () => {
-    setIsPlaying(false);
-    songAudio.currentTime = "0";
-    songAudio?.pause();
-  };
+const Track = ({ song, style, toggle, resetAudio, isPlaying }) => {
+  const { album, name, artists } = song;
+  const { addToPlaylist } = usePlaylist();
 
   return (
-    <div className="p-4 border-b border-secondary flex items-center justify-between gap-2">
+    <animated.div
+      style={style}
+      className="p-4 border-b border-secondary flex items-center justify-between"
+    >
       <div className="flex items-center w-5/6">
         <img
           src={album?.images[0]?.url}
@@ -50,32 +32,32 @@ const Track = ({ song, addSong }) => {
         </div>
       </div>
 
-      {!isPlaying ? (
-        <PlayCircle
+      <div className="flex flex-row gap-3">
+        {!isPlaying ? (
+          <PlayCircle
+            size="1.5rem"
+            className="text-highlight hover:text-main cursor-pointer"
+            onClick={() => toggle()}
+          />
+        ) : (
+          <PauseCircle
+            size="1.5rem"
+            className="text-main hover:text-highlight cursor-pointer"
+            onClick={() => toggle()}
+          />
+        )}
+        <StopCircle
           size="1.5rem"
           className="text-highlight hover:text-main cursor-pointer"
-          onClick={() => handlePlay()}
+          onClick={() => resetAudio()}
         />
-      ) : (
-        <PauseCircle
+        <MusicNotesPlus
           size="1.5rem"
-          className="text-main hover:text-highlight cursor-pointer"
-          onClick={() => handlePause()}
+          className="text-highlight hover:text-main cursor-pointer"
+          onClick={() => addToPlaylist(song)}
         />
-      )}
-      <StopCircle
-        size="1.5rem"
-        className="text-highlight hover:text-main cursor-pointer"
-        onClick={() => handleStop()}
-      />
-      <MusicNotesPlus
-        size="1.5rem"
-        className="text-highlight hover:text-main cursor-pointer"
-        onClick={() =>
-          addSong(id, artists[0].id, album.images[0].url, name, artists[0].name)
-        }
-      />
-    </div>
+      </div>
+    </animated.div>
   );
 };
 

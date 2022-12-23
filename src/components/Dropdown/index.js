@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import { Palette } from "phosphor-react";
-
-// Context
 import { ThemeContext } from "../../context/ThemeContext";
 
 const Dropdown = ({ options }) => {
