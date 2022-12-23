@@ -13,7 +13,7 @@ import addTracksToPlaylist from "../../api/addTracksToPlaylist";
 
 // Hooks
 import useUser from "../../hooks/useUser";
-import { PlaylistProvider } from "../../context/PlaylistContext";
+import { PlaylistProvider, usePlaylist } from "../../context/PlaylistContext";
 
 const HomeDev = () => {
   const { userId, token } = useUser();
@@ -24,8 +24,11 @@ const HomeDev = () => {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(false);
 
+  const { setExpanded } = usePlaylist();
+
   const addSong = (songId, cover, title, artist) => {
     setSongs([...songs, { songId, cover, title, artist }]);
+    setExpanded(true);
   };
 
   const removeSong = (index) => {

@@ -122,16 +122,16 @@ const Playlist = () => {
 
       <div
         id="playlist"
-        className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-xl shadow-2xl p-4 left-32 ${
-          expanded ? "h-1/2" : "h-20"
-        } w-1/4 bg-primary text-main transition-all`}
+        className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-lg shadow-lg p-4 right-32 ${
+          expanded ? "h-auto max-h-[32rem]" : "h-20"
+        } w-1/4 bg-accent text-main transition-all`}
       >
-        <div className="border-b flex flex-row justify-between border-primary">
+        <div className="flex flex-row justify-between">
           <input
             type="text"
             placeholder="enter playlist title..."
             onChange={(e) => setPlaylistTitle(e.target.value)}
-            className="w-full px-2 py-3 text-lg font-medium placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
+            className="w-full px-2 py-3 text-md font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
           />
 
           <button
@@ -145,7 +145,7 @@ const Playlist = () => {
           type="text"
           placeholder="enter playlist description..."
           onChange={(e) => setPlaylistDescription(e.target.value)}
-          className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
+          className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
         />
         {expanded ? (
           songList.map((song, index) => (
