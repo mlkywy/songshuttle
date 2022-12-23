@@ -24,11 +24,8 @@ const HomeDev = () => {
   const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(false);
 
-  const { setExpanded } = usePlaylist();
-
   const addSong = (songId, cover, title, artist) => {
     setSongs([...songs, { songId, cover, title, artist }]);
-    setExpanded(true);
   };
 
   const removeSong = (index) => {
