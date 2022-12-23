@@ -43,12 +43,12 @@ const PlaylistTrack = ({ song, index, handleRecs }) => {
       <div className="flex flex-row gap-3">
         <Sparkle
           size="1.5rem"
-          className="text-main hover:text-main cursor-pointer"
+          className="text-main hover:text-primary cursor-pointer"
           onClick={() => handleRecs(song.id)}
         />
         <Trash
           size="1.5rem"
-          className="text-main hover:text-main cursor-pointer"
+          className="text-main hover:text-primary cursor-pointer"
           onClick={() => removeFromPlaylist(index)}
         />
       </div>
