@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 // Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import HomeDev from "./pages/HomeDev";
+import Home from "./pages/Home";
 import { PlaylistProvider } from "./context/PlaylistContext";
 import { SearchProvider } from "./context/SearchContext";
 
@@ -50,7 +50,7 @@ function App() {
             <BrowserRouter>
               <div className={themeDictionary[theme]}>
                 <Header />
-                <HomeDev />
+                <Home />
                 <Footer />
               </div>
             </BrowserRouter>
