@@ -128,7 +128,7 @@ const Playlist = () => {
       <div
         id="playlist"
         className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-lg shadow-lg p-4 right-32 ${
-          expanded ? "h-auto max-h-[32rem]" : "h-20"
+          expanded ? "h-auto max-h-[35rem]" : "h-20"
         } w-[32rem] bg-accent text-main transition-all`}
       >
         <div className="flex flex-row justify-between">
@@ -173,6 +173,14 @@ const Playlist = () => {
               <>
                 <PaperPlaneTilt size="1.5rem" /> create playlist
               </>
+            }
+            onClick={() =>
+              handleCreatePlaylist(
+                playlistTitle,
+                playlistDescription,
+                songList.map((song) => `spotify:track:${song.id}`),
+                visibility
+              )
             }
           />
         </div>
