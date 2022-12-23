@@ -19,6 +19,8 @@ const Playlist = () => {
   const { resetAudio } = useAudio();
   const { setTracks } = useSearch();
   const {
+    expanded,
+    setExpanded,
     songList,
     playlistTitle,
     setPlaylistTitle,
@@ -64,7 +66,7 @@ const Playlist = () => {
 
   return (
     <>
-      <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
+      {/* <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
         <div className="p-4 gap-2 flex flex-col items-center justify-between">
           <input
             type="text"
@@ -116,6 +118,47 @@ const Playlist = () => {
             )
           }
         />
+      </div> */}
+
+      <div
+        id="playlist"
+        className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-xl shadow-2xl p-4 left-32 ${
+          expanded ? "h-1/2" : "h-20"
+        } w-1/4 bg-primary text-main transition-all`}
+      >
+        <div className="border-b flex flex-row justify-between border-primary">
+          <input
+            type="text"
+            placeholder="enter playlist title..."
+            onChange={(e) => setPlaylistTitle(e.target.value)}
+            className="w-full px-2 py-3 text-lg font-medium placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
+          />
+
+          <button
+            className="px-2 py-3 text-sm"
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? "close" : "expand"}
+          </button>
+        </div>
+        <textarea
+          type="text"
+          placeholder="enter playlist description..."
+          onChange={(e) => setPlaylistDescription(e.target.value)}
+          className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
+        />
+        {expanded ? (
+          songList.map((song, index) => (
+            <PlaylistTrack
+              key={index}
+              song={song}
+              index={index}
+              handleRecs={handleRecs}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

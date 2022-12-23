@@ -19,7 +19,7 @@ const Search = () => {
   };
 
   return (
-    <div className="w-1/3 flex flex-col items-center gap-6">
+    <div className="w-3/4 flex flex-col items-center gap-6">
       <div className="grow w-full relative flex flex-row gap-2">
         <input
           className="flex relative mx-auto px-5 py-3 w-4/5 rounded focus:outline-none bg-accent placeholder-primary text-main font-medium focus:w-full
