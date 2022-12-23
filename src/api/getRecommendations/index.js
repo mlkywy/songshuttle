@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { SPOTIFY_ENDPOINTS } from "../constants";
 
 const getRecommendations = async (auth, songId) => {

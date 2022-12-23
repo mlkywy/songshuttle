@@ -10,11 +10,13 @@ import getRecommendations from "../../api/getRecommendations";
 
 import { usePlaylist } from "../../context/PlaylistContext";
 import { useSearch } from "../../context/SearchContext";
+import { useAudio } from "../../context/AudioContext";
 import useUser from "../../hooks/useUser";
 
 const Playlist = () => {
   const [visibility, setVisibility] = useState(false);
   const { userId, token } = useUser();
+  const { resetAudio } = useAudio();
   const { setTracks } = useSearch();
   const {
     songList,
@@ -53,6 +55,7 @@ const Playlist = () => {
   };
 
   const handleRecs = async (songId) => {
+    resetAudio();
     setTracks([]);
     const data = await getRecommendations(token, songId);
     const recTracks = data.tracks;

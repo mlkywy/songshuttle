@@ -1,6 +1,8 @@
-import { useRef, useState, useEffect } from "react";
+import { createContext, useContext, useState, useRef, useEffect } from "react";
 
-const useAudio = () => {
+const AudioContext = createContext(null);
+
+export const AudioProvider = ({ children }) => {
   const audioRef = useRef(new Audio());
   const [playing, setPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(null);
@@ -38,14 +40,20 @@ const useAudio = () => {
     };
   }, []);
 
-  return {
-    playing,
-    setPlaying,
-    toggle,
-    updateSource,
-    resetAudio,
-    currentTrack,
-  };
+  return (
+    <AudioContext.Provider
+      value={{
+        playing,
+        setPlaying,
+        toggle,
+        updateSource,
+        resetAudio,
+        currentTrack,
+      }}
+    >
+      {children}
+    </AudioContext.Provider>
+  );
 };
 
-export default useAudio;
+export const useAudio = () => useContext(AudioContext);

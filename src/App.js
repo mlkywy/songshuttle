@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import { PlaylistProvider } from "./context/PlaylistContext";
 import { SearchProvider } from "./context/SearchContext";
+import { AudioProvider } from "./context/AudioContext";
 
 const queryClient = new QueryClient();
 
@@ -47,13 +48,15 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <PlaylistProvider>
           <SearchProvider>
-            <BrowserRouter>
-              <div className={themeDictionary[theme]}>
-                <Header />
-                <Home />
-                <Footer />
-              </div>
-            </BrowserRouter>
+            <AudioProvider>
+              <BrowserRouter>
+                <div className={themeDictionary[theme]}>
+                  <Header />
+                  <Home />
+                  <Footer />
+                </div>
+              </BrowserRouter>
+            </AudioProvider>
           </SearchProvider>
         </PlaylistProvider>
       </QueryClientProvider>
