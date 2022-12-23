@@ -17,6 +17,7 @@ const useAudio = () => {
   };
 
   const resetAudio = () => {
+    audioRef?.current?.pause();
     setPlaying(false);
     setCurrentTrack(null);
     audioRef.current.src = "";

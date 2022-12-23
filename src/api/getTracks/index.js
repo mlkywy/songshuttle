@@ -2,7 +2,6 @@ import axios from "axios";
 import { SPOTIFY_ENDPOINTS } from "../constants";
 
 const getTracks = async (query, auth) => {
-  console.log(query, auth);
   const headers = { Authorization: `Bearer ${auth}` };
   const params = { q: query, type: "track" };
 

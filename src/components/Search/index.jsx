@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import useUser from "../../hooks/useUser";
 import getTracks from "../../api/getTracks";
 import SearchResults from "../SearchResults";
-import { usePlaylist } from "../../context/PlaylistContext";
+import useAudio from "../../hooks/useAudio";
 
 const Search = () => {
   const [input, setInput] = useState("");
@@ -18,12 +18,13 @@ const Search = () => {
       enabled: !!token || !!query,
     }
   );
-
-  const { recTracks, setRecTracks } = usePlaylist();
   const [tracks, setTracks] = useState(data?.tracks?.items);
+  const { playing, toggle, resetAudio, updateSource, currentTrack } =
+    useAudio();
 
   useEffect(() => {
-    if (input && !recTracks) {
+    if (input) {
+      resetAudio();
       startTransition(() => {
         setQuery(input);
       });
@@ -32,20 +33,13 @@ const Search = () => {
     if (!input) {
       startTransition(() => {
         setTracks(() => []);
-        setRecTracks(null);
       });
     }
 
-    if (data?.tracks?.items && input && !recTracks) {
+    if (data?.tracks?.items && input) {
       setTracks(() => data?.tracks?.items);
     }
-
-    if (recTracks) {
-      startTransition(() => {
-        setTracks(recTracks);
-      });
-    }
-  }, [input, query, data, recTracks]);
+  }, [input, query, data]);
 
   return (
     <div className="w-1/3 flex flex-col items-center gap-6">
@@ -72,6 +66,11 @@ const Search = () => {
             isLoading={!isFetched || isLoading}
             results={tracks}
             addSong={() => {}}
+            playing={playing}
+            toggle={toggle}
+            resetAudio={resetAudio}
+            updateSource={updateSource}
+            currentTrack={currentTrack}
           />
         ) : (
           <></>

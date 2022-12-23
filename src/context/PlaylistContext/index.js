@@ -8,17 +8,12 @@ export const PlaylistProvider = ({ children }) => {
   const [expanded, setExpanded] = useState(true);
   const [playlistTitle, setPlaylistTitle] = useState(null);
   const [playlistDescription, setPlaylistDescription] = useState(null);
-  const [recTracks, setRecTracks] = useState([]);
 
   const updateTitle = (title) => setPlaylistTitle(title);
   const addToPlaylist = (song) => setSongList((prev) => [...prev, song]);
 
   const removeFromPlaylist = (index) => {
     setSongList(songList.filter((song, i) => i !== index));
-  };
-
-  const updateSearchResultsWithRecs = (tracks) => {
-    setRecTracks(tracks);
   };
 
   return (
@@ -32,9 +27,6 @@ export const PlaylistProvider = ({ children }) => {
         addToPlaylist,
         updateTitle,
         removeFromPlaylist,
-        updateSearchResultsWithRecs,
-        recTracks,
-        setRecTracks,
       }}
     >
       {children}

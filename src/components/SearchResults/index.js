@@ -33,17 +33,22 @@ const SearchLoader = ({ amount }) => {
   );
 };
 
-const SearchResults = ({ results, addSong, isLoading }) => {
+const SearchResults = ({
+  results,
+  addSong,
+  isLoading,
+  playing,
+  toggle,
+  resetAudio,
+  updateSource,
+  currentTrack,
+}) => {
   const { songList } = usePlaylist();
-  const { playing, toggle, resetAudio, updateSource, currentTrack } =
-    useAudio();
   const transitions = useTransition(results, {
     from: { opacity: 0, transform: "translateX(100%, 0, 0)" },
     enter: { opacity: 1, transform: "translateX(0%, 0, 0" },
     leave: { opacity: 1 },
   });
-
-  console.log("SONG LIST", songList);
 
   if (isLoading) {
     return <SearchLoader amount={8} />;
