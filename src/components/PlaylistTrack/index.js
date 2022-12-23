@@ -35,8 +35,8 @@ const PlaylistTrack = ({ song, index, handleRecs }) => {
       <div className="flex items-center w-5/6">
         <img src={cover} alt="" className="w-10 h-10 rounded-full mr-4" />
         <div className="flex flex-col">
-          <div className="font-bold text-main text-sm mb-2">{title}</div>
-          <div className="text-main text-xs font-medium">{artist}</div>
+          <div className="font-bold text-primary text-sm mb-2">{title}</div>
+          <div className="text-primary text-xs font-medium">{artist}</div>
         </div>
       </div>
 

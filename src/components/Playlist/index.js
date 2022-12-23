@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Square, CheckSquare } from "phosphor-react";
+import { Square, CheckSquare, PaperPlaneTilt } from "phosphor-react";
 
-import { Secondary, ToggleButton } from "../Buttons";
+import {
+  Secondary,
+  ToggleButton,
+  ShowOnProfile,
+  CreatePlaylist,
+} from "../Buttons";
 import PlaylistTrack from "../PlaylistTrack";
 
 import createPlaylist from "../../api/createPlaylist";
@@ -131,7 +136,7 @@ const Playlist = () => {
             type="text"
             placeholder="enter playlist title..."
             onChange={(e) => setPlaylistTitle(e.target.value)}
-            className="w-full px-2 py-3 text-md font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
+            className="w-full px-2 py-3 text-md font-semibold placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
           />
 
           <button
@@ -147,6 +152,30 @@ const Playlist = () => {
           onChange={(e) => setPlaylistDescription(e.target.value)}
           className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
         />
+        <div className="flex flex-row gap-4 items-center justify-center">
+          <ShowOnProfile
+            option={
+              <>
+                {visibility ? (
+                  <CheckSquare size="1.5rem" />
+                ) : (
+                  <Square size="1.5rem" />
+                )}
+                show on profile
+              </>
+            }
+            onClick={() => {
+              setVisibility(!visibility);
+            }}
+          />
+          <CreatePlaylist
+            option={
+              <>
+                <PaperPlaneTilt size="1.5rem" /> create playlist
+              </>
+            }
+          />
+        </div>
         {expanded ? (
           songList.map((song, index) => (
             <PlaylistTrack
