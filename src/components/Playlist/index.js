@@ -124,7 +124,7 @@ const Playlist = () => {
         id="playlist"
         className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-lg shadow-lg p-4 right-32 ${
           expanded ? "h-auto max-h-[32rem]" : "h-20"
-        } w-1/4 bg-accent text-main transition-all`}
+        } w-[32rem] bg-accent text-main transition-all`}
       >
         <div className="flex flex-row justify-between">
           <input
