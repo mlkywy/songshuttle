@@ -1,21 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.svg";
 
-// Components
+import logo from "../../assets/logo.svg";
 import Dropdown from "../Dropdown";
 import { Primary, NavLink } from "../Buttons";
 
-// Constants
+import useUser from "../../hooks/useUser";
+
 import {
   SPOTIFY_ENDPOINTS,
   REDIRECT_URI,
   RESPONSE_TYPE,
   SPOTIFY_SCOPES,
 } from "../../api/constants";
-
-// Hooks
-import useUser from "../../hooks/useUser";
 
 // Theme coptions
 const options = [

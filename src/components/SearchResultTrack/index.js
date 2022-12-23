@@ -1,15 +1,16 @@
-import React, { useState, useMemo } from "react";
+import React from "react";
+import { animated } from "react-spring";
 import {
   MusicNotesPlus,
   PlayCircle,
   PauseCircle,
   StopCircle,
 } from "phosphor-react";
-import { animated } from "react-spring";
+
 import { usePlaylist } from "../../context/PlaylistContext";
 
 const Track = ({ song, style, toggle, resetAudio, isPlaying }) => {
-  const { id, album, name, artists, preview_url } = song;
+  const { album, name, artists } = song;
   const { addToPlaylist } = usePlaylist();
 
   return (

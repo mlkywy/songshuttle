@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import PlaylistTrack from "../../components/PlaylistTrack";
+// import PlaylistTrack from "../../components/PlaylistTrack";
 
 const PlaylistContext = createContext(null);
 
 export const PlaylistProvider = ({ children }) => {
   const [songList, setSongList] = useState([]);
-  const [expanded, setExpanded] = useState(true);
+  // const [expanded, setExpanded] = useState(true);
   const [playlistTitle, setPlaylistTitle] = useState(null);
   const [playlistDescription, setPlaylistDescription] = useState(null);
 

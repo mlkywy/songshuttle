@@ -1,45 +1,21 @@
-import React, { startTransition, useEffect, useState } from "react";
+import React from "react";
 import { MagnifyingGlass } from "phosphor-react";
-import { useQuery } from "react-query";
-import useUser from "../../hooks/useUser";
-import getTracks from "../../api/getTracks";
+
 import SearchResults from "../SearchResults";
 import useAudio from "../../hooks/useAudio";
+import { useSearch } from "../../context/SearchContext";
 
 const Search = () => {
-  const [input, setInput] = useState("");
-  const [query, setQuery] = useState("");
-  const [isFocus, setIsFocus] = useState(false);
-  const { token } = useUser();
-  const { isFetched, isLoading, data } = useQuery(
-    ["playlist", query],
-    () => getTracks(query, token),
-    {
-      enabled: !!token || !!query,
-    }
-  );
-  const [tracks, setTracks] = useState(data?.tracks?.items);
-  const { playing, toggle, resetAudio, updateSource, currentTrack } =
+  const { input, setInput, isFocus, setIsFocus, isFetched, isLoading, tracks } =
+    useSearch();
+
+  const { playing, toggle, updateSource, currentTrack, resetAudio } =
     useAudio();
 
-  useEffect(() => {
-    if (input) {
-      resetAudio();
-      startTransition(() => {
-        setQuery(input);
-      });
-    }
-
-    if (!input) {
-      startTransition(() => {
-        setTracks(() => []);
-      });
-    }
-
-    if (data?.tracks?.items && input) {
-      setTracks(() => data?.tracks?.items);
-    }
-  }, [input, query, data]);
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    resetAudio();
+  };
 
   return (
     <div className="w-1/3 flex flex-col items-center gap-6">
@@ -50,7 +26,7 @@ const Search = () => {
           type="text"
           placeholder="search for songs..."
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => handleChange(e)}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
         />

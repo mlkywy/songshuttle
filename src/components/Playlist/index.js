@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import PlaylistTrack from "../PlaylistTrack";
-import { usePlaylist } from "../../context/PlaylistContext";
+import { Square, CheckSquare } from "phosphor-react";
+
 import { Secondary, ToggleButton } from "../Buttons";
+import PlaylistTrack from "../PlaylistTrack";
+
 import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
-import useUser from "../../hooks/useUser";
-import { Square, CheckSquare } from "phosphor-react";
 import getRecommendations from "../../api/getRecommendations";
 
+import { usePlaylist } from "../../context/PlaylistContext";
+import { useSearch } from "../../context/SearchContext";
+import useUser from "../../hooks/useUser";
+
 const Playlist = () => {
+  const [visibility, setVisibility] = useState(false);
+  const { userId, token } = useUser();
+  const { setTracks } = useSearch();
   const {
     songList,
     playlistTitle,
@@ -16,8 +23,6 @@ const Playlist = () => {
     playlistDescription,
     setPlaylistDescription,
   } = usePlaylist();
-  const { userId, token } = useUser();
-  const [visibility, setVisibility] = useState(false);
 
   const handleCreatePlaylist = async (
     title,
@@ -48,14 +53,10 @@ const Playlist = () => {
   };
 
   const handleRecs = async (songId) => {
-    // setInput("");
-    // setResults([]);
-
+    setTracks([]);
     const data = await getRecommendations(token, songId);
-    const tracks = data.tracks;
-    console.log(tracks);
-
-    // setTracks(tracks);
+    const recTracks = data.tracks;
+    setTracks(recTracks);
   };
 
   return (

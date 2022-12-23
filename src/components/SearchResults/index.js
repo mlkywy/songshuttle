@@ -1,8 +1,6 @@
-import React, { useMemo } from "react";
-import SearchResultTrack from "../SearchResultTrack";
+import React from "react";
 import { useTransition } from "react-spring";
-import useAudio from "../../hooks/useAudio";
-import { usePlaylist } from "../../context/PlaylistContext";
+import SearchResultTrack from "../SearchResultTrack";
 
 const TrackPlaceholder = () => (
   <div className="p-4 border-b border-secondary flex items-center justify-between animate-pulse">
@@ -43,7 +41,6 @@ const SearchResults = ({
   updateSource,
   currentTrack,
 }) => {
-  const { songList } = usePlaylist();
   const transitions = useTransition(results, {
     from: { opacity: 0, transform: "translateX(100%, 0, 0)" },
     enter: { opacity: 1, transform: "translateX(0%, 0, 0" },

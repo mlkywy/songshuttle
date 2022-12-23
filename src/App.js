@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 // Context
-import { ThemeContext } from './context/ThemeContext';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeContext } from "./context/ThemeContext";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Components
-import Home from './pages/Home';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomeDev from './pages/HomeDev';
-import { PlaylistProvider } from './context/PlaylistContext';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomeDev from "./pages/HomeDev";
+import { PlaylistProvider } from "./context/PlaylistContext";
+import { SearchProvider } from "./context/SearchContext";
 
 const queryClient = new QueryClient();
 
@@ -24,35 +24,37 @@ function App() {
      * If not, we will use their computer's default dark/light settings
      */
     if (theme === null) {
-      const localStorageTheme = localStorage.getItem('theme-choice');
-      const userDefaultDark = window.matchMedia('(prefers-color-scheme:dark)');
+      const localStorageTheme = localStorage.getItem("theme-choice");
+      const userDefaultDark = window.matchMedia("(prefers-color-scheme:dark)");
 
       if (localStorageTheme) {
-        setTheme(localStorageTheme !== 'dark' ? localStorageTheme : '');
+        setTheme(localStorageTheme !== "dark" ? localStorageTheme : "");
       } else {
-        setTheme(() => (userDefaultDark ? 'dark' : 'light'));
+        setTheme(() => (userDefaultDark ? "dark" : "light"));
       }
     }
   }, [theme]);
 
   const themeDictionary = {
-    dark: 'theme-dark',
-    light: 'theme-light',
-    custom1: 'theme-custom1',
-    custom2: 'theme-custom2',
+    dark: "theme-dark",
+    light: "theme-light",
+    custom1: "theme-custom1",
+    custom2: "theme-custom2",
   };
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <QueryClientProvider client={queryClient}>
         <PlaylistProvider>
-          <BrowserRouter>
-            <div className={themeDictionary[theme]}>
-              <Header />
-              <HomeDev />
-              <Footer />
-            </div>
-          </BrowserRouter>
+          <SearchProvider>
+            <BrowserRouter>
+              <div className={themeDictionary[theme]}>
+                <Header />
+                <HomeDev />
+                <Footer />
+              </div>
+            </BrowserRouter>
+          </SearchProvider>
         </PlaylistProvider>
       </QueryClientProvider>
     </ThemeContext.Provider>
