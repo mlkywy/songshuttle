@@ -34,12 +34,12 @@
   }
 
   .theme-light {
-    --main-text: #c24e4e;
+    --main-text: #962d39;
     --alternate-text: #000000;
-    --primary: #e69393;
-    --secondary: #fad4d4;
+    --primary: #de8282;
+    --secondary: #f7d7d7;
     --accent: #fcdcdc;
-    --highlight: #fff2f2;
+    --highlight: #ffffff;
 
     background: radial-gradient(
       ellipse at 5% 5%,
@@ -68,7 +68,7 @@
     --alternate-text: #0b0835;
     --primary: #091f29;
     --secondary: #1d7874;
-    --accent: #679289;
+    --accent: #588077;
     --highlight: #db4244;
 
     background: radial-gradient(

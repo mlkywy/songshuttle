@@ -87,3 +87,27 @@ export const ToggleButton = (props) => {
     </button>
   );
 };
+
+export const ShowOnProfile = (props) => {
+  return (
+    <button
+      className="px-4 py-2 text-sm font-semibold text-primary hover:text-main bg-transparent hover:bg-secondary border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
+      type={props.type}
+      onClick={props.onClick}
+    >
+      {props.option}
+    </button>
+  );
+};
+
+export const CreatePlaylist = (props) => {
+  return (
+    <button
+      className="px-4 py-2 text-sm font-semibold text-main hover:text-highlight bg-secondary hover:bg-primary border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
+      type={props.type}
+      onClick={props.onClick}
+    >
+      {props.option}
+    </button>
+  );
+};

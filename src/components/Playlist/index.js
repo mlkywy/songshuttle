@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Square, CheckSquare } from "phosphor-react";
+import { Square, CheckSquare, PaperPlaneTilt } from "phosphor-react";
 
-import { Secondary, ToggleButton } from "../Buttons";
+import {
+  Secondary,
+  ToggleButton,
+  ShowOnProfile,
+  CreatePlaylist,
+} from "../Buttons";
 import PlaylistTrack from "../PlaylistTrack";
 
 import createPlaylist from "../../api/createPlaylist";
@@ -19,6 +24,8 @@ const Playlist = () => {
   const { resetAudio } = useAudio();
   const { setTracks } = useSearch();
   const {
+    expanded,
+    setExpanded,
     songList,
     playlistTitle,
     setPlaylistTitle,
@@ -64,7 +71,7 @@ const Playlist = () => {
 
   return (
     <>
-      <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
+      {/* <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
         <div className="p-4 gap-2 flex flex-col items-center justify-between">
           <input
             type="text"
@@ -116,6 +123,79 @@ const Playlist = () => {
             )
           }
         />
+      </div> */}
+
+      <div
+        id="playlist"
+        className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-lg shadow-lg p-4 right-32 ${
+          expanded ? "h-auto max-h-[35rem]" : "h-20"
+        } w-[32rem] bg-accent text-main transition-all`}
+      >
+        <div className="flex flex-row justify-between">
+          <input
+            type="text"
+            placeholder="enter playlist title..."
+            onChange={(e) => setPlaylistTitle(e.target.value)}
+            className="w-full px-2 py-3 text-md font-semibold placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
+          />
+
+          <button
+            className="px-2 py-3 text-sm"
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? "close" : "expand"}
+          </button>
+        </div>
+        <textarea
+          type="text"
+          placeholder="enter playlist description..."
+          onChange={(e) => setPlaylistDescription(e.target.value)}
+          className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
+        />
+        <div className="flex flex-row gap-4 items-center justify-center">
+          <ShowOnProfile
+            option={
+              <>
+                {visibility ? (
+                  <CheckSquare size="1.5rem" />
+                ) : (
+                  <Square size="1.5rem" />
+                )}
+                show on profile
+              </>
+            }
+            onClick={() => {
+              setVisibility(!visibility);
+            }}
+          />
+          <CreatePlaylist
+            option={
+              <>
+                <PaperPlaneTilt size="1.5rem" /> create playlist
+              </>
+            }
+            onClick={() =>
+              handleCreatePlaylist(
+                playlistTitle,
+                playlistDescription,
+                songList.map((song) => `spotify:track:${song.id}`),
+                visibility
+              )
+            }
+          />
+        </div>
+        {expanded ? (
+          songList.map((song, index) => (
+            <PlaylistTrack
+              key={index}
+              song={song}
+              index={index}
+              handleRecs={handleRecs}
+            />
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

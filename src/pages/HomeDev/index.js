@@ -1,27 +1,27 @@
-import { useState } from 'react';
-import { MagnifyingGlass, Square, CheckSquare } from 'phosphor-react';
+import { useState } from "react";
+import { MagnifyingGlass, Square, CheckSquare } from "phosphor-react";
 
 // Components
-import { Secondary } from '../../components/Buttons';
-import Playlist from '../../components/Playlist';
-import SearchResults from '../../components/SearchResults';
+import { Secondary } from "../../components/Buttons";
+import Playlist from "../../components/Playlist";
+import SearchResults from "../../components/SearchResults";
 
 // API
-import getTracks from '../../api/getTracks';
-import createPlaylist from '../../api/createPlaylist';
-import addTracksToPlaylist from '../../api/addTracksToPlaylist';
+import getTracks from "../../api/getTracks";
+import createPlaylist from "../../api/createPlaylist";
+import addTracksToPlaylist from "../../api/addTracksToPlaylist";
 
 // Hooks
-import useUser from '../../hooks/useUser';
-import { PlaylistProvider } from '../../context/PlaylistContext';
+import useUser from "../../hooks/useUser";
+import { PlaylistProvider, usePlaylist } from "../../context/PlaylistContext";
 
-const Home = () => {
+const HomeDev = () => {
   const { userId, token } = useUser();
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [songs, setSongs] = useState([]);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [visibility, setVisibility] = useState(false);
 
   const addSong = (songId, cover, title, artist) => {
@@ -35,13 +35,13 @@ const Home = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
 
-    if (query === '') {
+    if (query === "") {
       setResults([]);
       return;
     }
 
     if (!token) {
-      setQuery('');
+      setQuery("");
       setResults([]);
       return;
     }
@@ -60,7 +60,7 @@ const Home = () => {
 
     if (title === null || songIds.length === 0) {
       console.log(
-        'Make sure the title field is not empty and include at least one song!'
+        "Make sure the title field is not empty and include at least one song!"
       );
       return;
     }
@@ -142,4 +142,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeDev;

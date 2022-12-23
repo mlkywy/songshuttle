@@ -19,10 +19,10 @@ const Search = () => {
   };
 
   return (
-    <div className="w-1/3 flex flex-col items-center gap-6">
+    <div className="w-3/4 flex flex-col items-center gap-6">
       <div className="grow w-full relative flex flex-row gap-2">
         <input
-          className="flex relative mx-auto px-5 py-3 w-4/5 rounded focus:outline-none bg-accent placeholder-primary text-main font-medium focus:w-full
+          className="flex relative mx-auto px-5 py-3 w-4/5 rounded focus:outline-none bg-accent placeholder-primary text-main text-md font-medium focus:w-full
       transition-all"
           type="text"
           placeholder="search for songs..."
@@ -33,7 +33,7 @@ const Search = () => {
         />
         <MagnifyingGlass
           className={`transition-all absolute w-18 text-main text-xl font-bold top-3.5 ${
-            isFocus ? "left-[93%]" : "left-[83%]"
+            isFocus ? "left-[95%]" : "left-[85%]"
           }`}
         />{" "}
       </div>
