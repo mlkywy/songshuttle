@@ -5,7 +5,7 @@ const PlaylistContext = createContext(null);
 
 export const PlaylistProvider = ({ children }) => {
   const [songList, setSongList] = useState([]);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [playlistTitle, setPlaylistTitle] = useState(null);
   const [playlistDescription, setPlaylistDescription] = useState(null);
 
