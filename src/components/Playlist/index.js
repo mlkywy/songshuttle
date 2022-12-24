@@ -31,6 +31,8 @@ const Playlist = () => {
     setPlaylistTitle,
     playlistDescription,
     setPlaylistDescription,
+    playlistId,
+    setPlaylistId,
   } = usePlaylist();
 
   const handleCreatePlaylist = async (
@@ -55,10 +57,12 @@ const Playlist = () => {
       visibility
     );
 
-    const playlistId = data.id;
+    const id = data.id;
+    setPlaylistId(id);
 
     // Add songs to the playlist
-    await addTracksToPlaylist(token, playlistId, songIds);
+    await addTracksToPlaylist(token, id, songIds);
+    console.log(playlistId);
   };
 
   const handleRecs = async (songId) => {

@@ -32,10 +32,11 @@ const Header = () => {
 
   return (
     <div className="fixed w-full flex flex-row items-center justify-between text-main h-20 z-10 md:px-32 lg:px-64">
-      <div>
-        <Link to="/">
+      <div className="text-3xl font-bitter font-bold flex flex-row items-center gap-1">
+        {/* <Link to="/">
           <img src={logo} alt="notepad logo" width="200px" />
-        </Link>
+        </Link> */}
+        songshuttle
       </div>
 
       <div className="flex flex-row items-center gap-5 justify-between">

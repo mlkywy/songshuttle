@@ -8,6 +8,7 @@ export const PlaylistProvider = ({ children }) => {
   const [expanded, setExpanded] = useState(true);
   const [playlistTitle, setPlaylistTitle] = useState(null);
   const [playlistDescription, setPlaylistDescription] = useState(null);
+  const [playlistId, setPlaylistId] = useState(null);
 
   const updateTitle = (title) => setPlaylistTitle(title);
   const addToPlaylist = (song) => setSongList((prev) => [...prev, song]);
@@ -29,6 +30,8 @@ export const PlaylistProvider = ({ children }) => {
         addToPlaylist,
         updateTitle,
         removeFromPlaylist,
+        playlistId,
+        setPlaylistId,
       }}
     >
       {children}

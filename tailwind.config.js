@@ -2,6 +2,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        bitter: ["bitter", "serif"],
+      },
       colors: {
         main: "var(--main-text)",
         alt: "var(--alternate-text)",
