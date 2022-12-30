@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { Square, CheckSquare, PaperPlaneTilt } from "phosphor-react";
+import React, { useState, useEffect } from "react";
 
 import {
-  Secondary,
-  ToggleButton,
-  ShowOnProfile,
-  CreatePlaylist,
-} from "../Buttons";
+  Square,
+  CheckSquare,
+  PaperPlaneTilt,
+  Upload,
+  XCircle,
+} from "phosphor-react";
+
+import convertToBase64 from "../../utils/convertToBase64";
+
+import { OptionButton, CreateButton, ImageButton } from "../Buttons";
 import PlaylistTrack from "../PlaylistTrack";
 
+import getRecommendations from "../../api/getRecommendations";
 import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
-import getRecommendations from "../../api/getRecommendations";
+import addCustomPlaylistCover from "../../api/addCustomPlaylistCover";
 
 import { usePlaylist } from "../../context/PlaylistContext";
 import { useSearch } from "../../context/SearchContext";
@@ -23,6 +28,7 @@ const Playlist = () => {
   const { userId, token } = useUser();
   const { resetAudio } = useAudio();
   const { setTracks } = useSearch();
+
   const {
     expanded,
     setExpanded,
@@ -31,9 +37,35 @@ const Playlist = () => {
     setPlaylistTitle,
     playlistDescription,
     setPlaylistDescription,
-    playlistId,
-    setPlaylistId,
   } = usePlaylist();
+
+  const [image, setImage] = useState(null);
+  const [imageText, setImageText] = useState(null);
+  const [errorText, setErrorText] = useState(null);
+
+  useEffect(() => {}, [image]);
+
+  const handleSetImage = async (e) => {
+    setErrorText(null);
+
+    const file = e.target.files[0];
+
+    if (file.size > 4000000) {
+      setImage(null);
+      setErrorText("Your jpg / png must be under 4 MB!");
+    } else {
+      let base64 = await convertToBase64(file);
+      base64 = base64.split("base64,")[1];
+
+      setImage(base64);
+      setImageText(file.name);
+    }
+  };
+
+  const handleResetImage = async () => {
+    setImage(null);
+    setImageText(null);
+  };
 
   const handleCreatePlaylist = async (
     title,
@@ -41,11 +73,12 @@ const Playlist = () => {
     songIds,
     visibility
   ) => {
+    setErrorText(null);
+
     if (title === null || songIds.length === 0) {
-      console.log(
+      return setErrorText(
         "Make sure the title field is not empty and include at least one song!"
       );
-      return;
     }
 
     // Create new playlist
@@ -58,11 +91,15 @@ const Playlist = () => {
     );
 
     const id = data.id;
-    setPlaylistId(id);
+    console.log("ID: " + id);
 
     // Add songs to the playlist
     await addTracksToPlaylist(token, id, songIds);
-    console.log(playlistId);
+
+    // // Add image to playlist (if exists)
+    if (image && id) {
+      await addCustomPlaylistCover(token, id, image);
+    }
   };
 
   const handleRecs = async (songId) => {
@@ -75,60 +112,6 @@ const Playlist = () => {
 
   return (
     <>
-      {/* <div className="overflow-y-auto w-1/4 h-full bg-primary rounded-lg shadow-lg">
-        <div className="p-4 gap-2 flex flex-col items-center justify-between">
-          <input
-            type="text"
-            placeholder="enter playlist title..."
-            onChange={(e) => setPlaylistTitle(e.target.value)}
-            className="w-full px-2 py-2 text-lg font-medium placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
-          />
-          <textarea
-            type="text"
-            placeholder="enter playlist description..."
-            onChange={(e) => setPlaylistDescription(e.target.value)}
-            className="w-full px-2 py-2 text-sm font-medium placeholder-accent text-main focus:outline-none focus:shadow-outline bg-transparent"
-          />
-        </div>
-
-        {songList.map((song, index) => (
-          <PlaylistTrack
-            key={index}
-            song={song}
-            index={index}
-            handleRecs={handleRecs}
-          />
-        ))}
-      </div>
-      <div className="flex flex-col gap-4">
-        <ToggleButton
-          option={
-            <>
-              {visibility ? (
-                <CheckSquare size="1.5rem" />
-              ) : (
-                <Square size="1.5rem" />
-              )}
-              show on profile
-            </>
-          }
-          onClick={() => {
-            setVisibility(!visibility);
-          }}
-        />
-        <Secondary
-          option="create playlist"
-          onClick={() =>
-            handleCreatePlaylist(
-              playlistTitle,
-              playlistDescription,
-              songList.map((song) => `spotify:track:${song.id}`),
-              visibility
-            )
-          }
-        />
-      </div> */}
-
       <div
         id="playlist"
         className={`absolute flex flex-col overflow-y-auto gap-4 grow bottom-24 rounded-lg shadow-lg p-4 right-32 ${
@@ -156,37 +139,74 @@ const Playlist = () => {
           onChange={(e) => setPlaylistDescription(e.target.value)}
           className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
         />
-        <div className="flex flex-row gap-4 items-center justify-center">
-          <ShowOnProfile
-            option={
-              <>
-                {visibility ? (
-                  <CheckSquare size="1.5rem" />
-                ) : (
-                  <Square size="1.5rem" />
-                )}
-                show on profile
-              </>
-            }
-            onClick={() => {
-              setVisibility(!visibility);
-            }}
-          />
-          <CreatePlaylist
-            option={
-              <>
-                <PaperPlaneTilt size="1.5rem" /> create playlist
-              </>
-            }
-            onClick={() =>
-              handleCreatePlaylist(
-                playlistTitle,
-                playlistDescription,
-                songList.map((song) => `spotify:track:${song.id}`),
-                visibility
-              )
-            }
-          />
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row gap-4 items-center justify-center">
+            <ImageButton
+              option={
+                <>
+                  <Upload size="1.3rem" />
+                  upload cover
+                  <input
+                    type="file"
+                    name="filename"
+                    style={{ display: "none" }}
+                    accept="image/jpeg, image/png"
+                    onChange={(e) => handleSetImage(e)}
+                  />
+                </>
+              }
+            />
+
+            <OptionButton
+              option={
+                <>
+                  {visibility ? (
+                    <CheckSquare size="1.3rem" />
+                  ) : (
+                    <Square size="1.3rem" />
+                  )}
+                  show on profile
+                </>
+              }
+              onClick={() => {
+                setVisibility(!visibility);
+              }}
+            />
+            <CreateButton
+              option={
+                <>
+                  <PaperPlaneTilt size="1.5rem" /> create playlist
+                </>
+              }
+              onClick={() =>
+                handleCreatePlaylist(
+                  playlistTitle,
+                  playlistDescription,
+                  songList.map((song) => `spotify:track:${song.id}`),
+                  visibility
+                )
+              }
+            />
+          </div>
+
+          {image ? (
+            <button
+              className="ml-2 text-xs text-main flex flex-row gap-1"
+              onClick={() => handleResetImage()}
+            >
+              {imageText} <XCircle />
+            </button>
+          ) : (
+            <></>
+          )}
+
+          {errorText ? (
+            <div className="ml-2 text-xs text-main flex flex-row gap-1">
+              {errorText}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         {expanded ? (
           songList.map((song, index) => (

@@ -25,6 +25,7 @@ const options = [
 const scopes = [
   SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
   SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
+  SPOTIFY_SCOPES.UGC_IMAGE_UPLOAD,
 ];
 
 const Header = () => {
