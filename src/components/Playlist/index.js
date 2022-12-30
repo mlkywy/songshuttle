@@ -40,6 +40,7 @@ const Playlist = () => {
   } = usePlaylist();
 
   const [image, setImage] = useState(null);
+  const [url, setUrl] = useState(null);
   const [imageText, setImageText] = useState(null);
   const [errorText, setErrorText] = useState(null);
 
@@ -50,9 +51,9 @@ const Playlist = () => {
 
     const file = e.target.files[0];
 
-    if (file.size > 4000000) {
+    if (file.size > 256000) {
       setImage(null);
-      setErrorText("Your jpg / png must be under 4 MB!");
+      setErrorText("The maximum payload size is 256 KB!");
     } else {
       let base64 = await convertToBase64(file);
       base64 = base64.split("base64,")[1];
@@ -91,7 +92,12 @@ const Playlist = () => {
     );
 
     const id = data.id;
-    console.log("ID: " + id);
+
+    if (!id) {
+      return setErrorText("Uh oh... something went wrong!");
+    }
+
+    setUrl(`https://open.spotify.com/playlist/${id}`);
 
     // Add songs to the playlist
     await addTracksToPlaylist(token, id, songIds);
@@ -191,7 +197,7 @@ const Playlist = () => {
 
           {image ? (
             <button
-              className="ml-2 text-xs text-main flex flex-row gap-1"
+              className="ml-2 text-xs text-semibold text-main flex flex-row gap-1"
               onClick={() => handleResetImage()}
             >
               {imageText} <XCircle />
@@ -201,9 +207,20 @@ const Playlist = () => {
           )}
 
           {errorText ? (
-            <div className="ml-2 text-xs text-main flex flex-row gap-1">
+            <div className="ml-2 text-xs text-semibold text-main flex flex-row gap-1">
               {errorText}
             </div>
+          ) : (
+            <></>
+          )}
+
+          {url ? (
+            <a
+              href={url}
+              className="ml-2 text-xs text-semibold text-main flex flex-row gap-1"
+            >
+              {url}
+            </a>
           ) : (
             <></>
           )}
