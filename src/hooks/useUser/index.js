@@ -7,6 +7,7 @@ const useUser = () => {
   const hash = window.location.hash;
 
   useEffect(() => {
+    console.log(token);
     const fetchData = async () => {
       const user = await getUser(token);
       setUserId(user?.id);
