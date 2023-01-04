@@ -123,7 +123,7 @@ const Playlist = () => {
         className={`absolute flex flex-col gap-4 grow bottom-24 rounded-lg shadow-lg p-4 right-32 ${
           expanded
             ? "h-auto max-h-[35rem] overflow-y-auto"
-            : "h-20 overflow-y-none"
+            : "h-20 overflow-y-hidden"
         } w-[32rem] bg-accent text-main transition-all`}
       >
         <div className="flex flex-row justify-between">
