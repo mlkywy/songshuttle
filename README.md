@@ -5,9 +5,7 @@
 SongShuttle is a simple application that makes use of the Spotify API to search for songs, find recommendations, and create playlists on your account on the fly!
 
 ### Built With
-
-- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [Node](https://nodejs.org/en/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) / [Node](https://nodejs.org/en/) / [React](https://reactjs.org/)
 - [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
 
 ## Getting Started
