@@ -1,21 +1,27 @@
-const MAX_BASE64_SIZE = 260000; // 256 KB
+const compressImage = (file, size) => {
+  return new Promise((resolve, reject) => {
+    let img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = () => {
+      let canvas = document.createElement("canvas");
+      let ctx = canvas.getContext("2d");
 
-const compressImage = (imageData) => {
-  const image = new Image();
-  image.src = imageData;
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(image, 0, 0);
+      let aspectRatio = img.width / img.height;
+      let newWidth = Math.sqrt(size * aspectRatio);
+      let newHeight = newWidth / aspectRatio;
 
-  let dataUrl = canvas.toDataURL("image/jpeg", 0.92);
-  while (dataUrl.length > MAX_BASE64_SIZE) {
-    // Compress image while keeping the base64 size under the maximum limit
-    canvas.width *= 0.9;
-    canvas.height *= 0.9;
-    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    dataUrl = canvas.toDataURL("image/jpeg", 0.92);
-  }
-  return dataUrl;
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+
+      ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
+      canvas.toBlob((blob) => {
+        resolve(new File([blob], file.name, { type: "image/jpeg" }));
+      }, "image/jpeg", 0.8);
+    };
+    img.onerror = (e) => {
+      reject(e);
+    };
+  });
 };
-
 export default compressImage;

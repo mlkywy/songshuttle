@@ -8,6 +8,7 @@ import {
   XCircle,
 } from "phosphor-react";
 
+import compressImage from "../../utils/compressImage";
 import convertToBase64 from "../../utils/convertToBase64";
 
 import { OptionButton, CreateButton, ImageButton } from "../Buttons";
@@ -49,15 +50,23 @@ const Playlist = () => {
   const handleSetImage = async (e) => {
     setErrorText(null);
 
-    const file = e.target.files[0];
+    let file = e.target.files[0];
 
-    if (file.size > 256000) {
+    if (file.size > 4000000)
+    {
       setImage(null);
-      setErrorText("The maximum payload size is 256 KB!");
-    } else {
+      setErrorText("Image must be less than 4 MB in size.");
+    }
+
+    while (file.size < 4000000 && file.size > 100000)
+    {
+      file = await compressImage(file, file.size);
+    }
+
+    if (file.size <= 100000)
+    {
       let base64 = await convertToBase64(file);
       base64 = base64.split("base64,")[1];
-
       setImage(base64);
       setImageText(file.name);
     }
@@ -102,7 +111,7 @@ const Playlist = () => {
     // Add songs to the playlist
     await addTracksToPlaylist(token, id, songIds);
 
-    // // Add image to playlist (if exists)
+    // Add image to playlist (if exists)
     if (image && id) {
       await addCustomPlaylistCover(token, id, image);
     }

@@ -2,7 +2,6 @@ import React from "react";
 import { MagnifyingGlass } from "phosphor-react";
 
 import SearchResults from "../SearchResults";
-// import useAudio from "../../hooks/useAudio";
 import { useAudio } from "../../context/AudioContext";
 import { useSearch } from "../../context/SearchContext";
 
