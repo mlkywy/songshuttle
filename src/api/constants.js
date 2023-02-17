@@ -1,4 +1,3 @@
-export const REDIRECT_URI = "https://mlkywy.net/songshuttle/";
 export const RESPONSE_TYPE = "token";
 
 export const SPOTIFY_SCOPES = {
