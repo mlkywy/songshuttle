@@ -60,8 +60,10 @@ const useUser = () => {
   const redirectToAuthorization = () => {
     setToken(null);
     setUserId(null);
+
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("expires_in");
+
     const url = login();
     window.location.replace(url);
   };
@@ -69,6 +71,7 @@ const useUser = () => {
   const logout = () => {
     setToken(null);
     setUserId(null);
+
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("expires_in");
     window.location.reload();
