@@ -1,4 +1,4 @@
-export const REDIRECT_URI = "http://localhost:3000";
+export const REDIRECT_URI = "https://mlkywy.net/songshuttle/";
 export const RESPONSE_TYPE = "token";
 
 export const SPOTIFY_SCOPES = {
