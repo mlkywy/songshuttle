@@ -3,7 +3,7 @@ import getUser from "../../api/getUser";
 import login from "../../api/login";
 
 const useUser = () => {
-  console.log($`Token: {token}`);
+  console.log(`Token: ${token}`);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(
     window.localStorage.getItem("access_token")
