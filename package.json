@@ -18,6 +18,7 @@
     "react-spring": "^9.6.1",
     "web-vitals": "^3.1.0"
   },
+  "homepage": "http://mlkywy.github.io/songshuttle",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
