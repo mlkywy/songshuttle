@@ -3,7 +3,6 @@ import getUser from "../../api/getUser";
 import login from "../../api/login";
 
 const useUser = () => {
-  console.log(`Token: ${token}`);
   const [userId, setUserId] = useState(null);
   const [token, setToken] = useState(
     window.localStorage.getItem("access_token")
@@ -26,7 +25,7 @@ const useUser = () => {
         .find((elem) => elem.startsWith("access_token"))
         .split("=")[1];
 
-      const expiresIn = hash
+      const expirationTime = hash
         .substring(1)
         .split("&")
         .find((elem) => elem.startsWith("expires_in"))
@@ -34,6 +33,8 @@ const useUser = () => {
 
       window.location.hash = "";
       window.localStorage.setItem("access_token", token);
+
+      const expiresIn = Date.now() / 1000 + Number(expirationTime);
       window.localStorage.setItem("expires_in", expiresIn);
 
       setToken(token);
@@ -48,7 +49,6 @@ const useUser = () => {
       if (expiresIn && Date.now() / 1000 > expiresIn) {
         clearInterval(checkTokenExpiration);
         redirectToAuthorization();
-        console.log("Token expired!");
       }
     }, 5000);
 
@@ -60,10 +60,8 @@ const useUser = () => {
   const redirectToAuthorization = () => {
     setToken(null);
     setUserId(null);
-
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("expires_in");
-
     const url = login();
     window.location.replace(url);
   };
@@ -71,7 +69,6 @@ const useUser = () => {
   const logout = () => {
     setToken(null);
     setUserId(null);
-
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("expires_in");
     window.location.reload();
