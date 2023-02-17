@@ -6,7 +6,6 @@ import Dropdown from "../Dropdown";
 import { Primary, NavLink } from "../Buttons";
 
 import useUser from "../../hooks/useUser";
-import login from "../../api/login";
 
 // Theme coptions
 const options = [
@@ -17,7 +16,7 @@ const options = [
 ];
 
 const Header = () => {
-  const { token, logout } = useUser();
+  const { token, redirectToAuthorization, logout } = useUser();
 
   return (
     <div className="fixed w-full flex flex-row items-center justify-between text-main h-20 z-10 md:px-32 lg:px-64">
@@ -30,7 +29,10 @@ const Header = () => {
 
       <div className="flex flex-row items-center gap-5 justify-between">
         {!token ? (
-          <Primary option="login to spotify" link={login()} />
+          <Primary
+            option="login to spotify"
+            onClick={redirectToAuthorization}
+          />
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
