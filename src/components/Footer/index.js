@@ -32,7 +32,7 @@ const Footer = () => {
 
         <div className="flex flex-row items-center justify-between gap-5 font-medium">
           <a
-            href="https://github.com/mlkywy/spotify"
+            href="https://github.com/mlkywy/songshuttle"
             target="_blank"
             rel="noopener noreferrer"
           >

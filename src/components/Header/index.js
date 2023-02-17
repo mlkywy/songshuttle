@@ -32,7 +32,7 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
-        <NavLink option="how it works" link="about" />
+        <NavLink option="how it works" link="#" />
         <div>
           <Dropdown options={options} />
         </div>
