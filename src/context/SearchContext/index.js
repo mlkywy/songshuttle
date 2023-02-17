@@ -20,7 +20,7 @@ export const SearchProvider = ({ children }) => {
     ["playlist", query],
     () => getTracks(query, token),
     {
-      enabled: !!token || !!query,
+      enabled: !!token && !!query,
     }
   );
   const [tracks, setTracks] = useState(data?.tracks?.items);

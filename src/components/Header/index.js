@@ -6,13 +6,7 @@ import Dropdown from "../Dropdown";
 import { Primary, NavLink } from "../Buttons";
 
 import useUser from "../../hooks/useUser";
-
-import {
-  SPOTIFY_ENDPOINTS,
-  REDIRECT_URI,
-  RESPONSE_TYPE,
-  SPOTIFY_SCOPES,
-} from "../../api/constants";
+import login from "../../api/login";
 
 // Theme coptions
 const options = [
@@ -20,12 +14,6 @@ const options = [
   { label: "blossom", value: "light" },
   { label: "dreamy", value: "custom1" },
   { label: "retro", value: "custom2" },
-];
-
-const scopes = [
-  SPOTIFY_SCOPES.PLAYLIST_MODIFY_PRIVATE,
-  SPOTIFY_SCOPES.PLAYLIST_MODIFY_PUBLIC,
-  SPOTIFY_SCOPES.UGC_IMAGE_UPLOAD,
 ];
 
 const Header = () => {
@@ -42,14 +30,7 @@ const Header = () => {
 
       <div className="flex flex-row items-center gap-5 justify-between">
         {!token ? (
-          <Primary
-            option="login to spotify"
-            link={`${SPOTIFY_ENDPOINTS.AUTHORIZE}?client_id=${
-              process.env.REACT_APP_CLIENT_ID
-            }&redirect_uri=${REDIRECT_URI}&scope=${scopes.join(
-              "%20"
-            )}&response_type=${RESPONSE_TYPE}&show_dialog=true`}
-          />
+          <Primary option="login to spotify" link={login()} />
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}

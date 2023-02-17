@@ -21,4 +21,5 @@ export const SPOTIFY_ENDPOINTS = {
   GET_RECOMMENDATIONS: "https://api.spotify.com/v1/recommendations",
   ADD_CUSTOM_PLAYLIST_COVER:
     "https://api.spotify.com/v1/playlists/:playlistId/images",
+  GET_REFRESH_TOKEN: "https://accounts.spotify.com/api/token",
 };
