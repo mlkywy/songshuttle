@@ -45,6 +45,7 @@ function App() {
     custom2: "theme-custom2",
     custom3: "theme-custom3",
     custom4: "theme-custom4",
+    custom5: "theme-custom5",
   };
 
   return (

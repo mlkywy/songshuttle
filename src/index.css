@@ -107,6 +107,21 @@
       var(--primary)
     );
   }
+
+  .theme-custom5 {
+    --main-text: #ffffff;
+    --alternate-text: #000000;
+    --primary: #26231e;
+    --secondary: #2e4b36;
+    --accent: #5f725d;
+    --highlight: #529c66;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
