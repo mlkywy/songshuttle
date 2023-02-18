@@ -56,8 +56,11 @@ function App() {
                   <Header />
                   {/* <Home /> */}
                   <Routes>
-                    <Route path="/" element={<Home />} exact />
-                    <Route path="/documentation" element={<Documentation />} />
+                    <Route path="/songshuttle/" element={<Home />} exact />
+                    <Route
+                      path="/songshuttle/documentation"
+                      element={<Documentation />}
+                    />
                   </Routes>
                   <Footer />
                 </div>
