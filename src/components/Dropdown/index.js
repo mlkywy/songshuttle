@@ -31,7 +31,7 @@ const Dropdown = ({ options }) => {
 
         {showOptions && (
           <div
-            className="origin-top-right absolute right-0 mt-4 w-32 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 focus:outline-none"
+            className="origin-top-right absolute right-0 mt-4 w-36 rounded-md shadow-lg bg-primary ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menubutton"
@@ -43,7 +43,7 @@ const Dropdown = ({ options }) => {
                   options.map((option) => (
                     <button
                       onClick={() => handleThemeOptions(option.value)}
-                      className="text-main font-medium px-4 py-2 text-sm hover:bg-secondary w-full flex"
+                      className="text-main font-semibold px-4 py-3 text-xs hover:bg-secondary w-full flex"
                       role="menuitem"
                       tabIndex="-1"
                     >
