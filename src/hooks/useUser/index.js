@@ -72,9 +72,11 @@ const useUser = () => {
     setToken(null);
     setUserId(null);
 
+    const url = process.env.REACT_APP_REDIRECT_URI;
+
     window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("expires_in");
-    window.location.reload();
+    window.location.replace(url);
   };
 
   return { userId, token, redirectToAuthorization, logout };
