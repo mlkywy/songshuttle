@@ -21,33 +21,13 @@ const Documentation = () => {
             </h1>
             <p className="p-2">
               <span className="font-bold">Glad you asked.</span> SongShuttle is
-              a simple application that makes use of the{" "}
+              a simple web application that makes use of the{" "}
               <span className="font-bold">Spotify API</span> to search for
-              songs, find recommendations, and create playlists on your account
-              on the fly!
-            </p>
-            <h1 className="p-2 text-2xl font-bitter font-bold">
-              How does it work?
-            </h1>
-            <p className="p-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
-            </p>
-            <p className="p-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-              ex ea commodo consequat.
+              songs, generate recommendations, and create playlists for your
+              account on the fly! It's built with the React framework and
+              involves the implicit grant flow, so there is no server-side code
+              required to authorize users to log in and make calls to the API
+              with the app.
             </p>
           </div>
         </div>
