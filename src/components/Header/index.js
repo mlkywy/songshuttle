@@ -10,9 +10,13 @@ import useUser from "../../hooks/useUser";
 // Theme options
 const options = [
   { label: "spaceship", value: "dark" },
-  { label: "blossom", value: "light" },
-  { label: "dreamy", value: "custom1" },
+  { label: "cherry blossom", value: "light" },
+  { label: "daydream", value: "custom1" },
   { label: "retro", value: "custom2" },
+  { label: "coral reef", value: "custom3" },
+  { label: "sunset sky", value: "custom4" },
+  { label: "forest cottage", value: "custom5" },
+  { label: "cloudy", value: "custom6" },
 ];
 
 const Header = () => {

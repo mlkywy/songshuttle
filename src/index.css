@@ -6,9 +6,9 @@
   :root {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #211829;
+    --primary: #111021;
     --secondary: #38334f;
-    --accent: #5c527f;
+    --accent: #584d80;
     --highlight: #686da1;
 
     background: radial-gradient(
@@ -38,7 +38,7 @@
     --alternate-text: #000000;
     --primary: #de8282;
     --secondary: #f7d7d7;
-    --accent: #fcdcdc;
+    --accent: #fce6e6;
     --highlight: #ffffff;
 
     background: radial-gradient(
@@ -49,10 +49,10 @@
   }
 
   .theme-custom1 {
-    --main-text: #ffffff;
+    --main-text: #f0edfc;
     --alternate-text: #000000;
-    --primary: #473450;
-    --secondary: #895b78;
+    --primary: #3a2842;
+    --secondary: #8f5b7c;
     --accent: #b26d79;
     --highlight: #ffa3b3;
 
@@ -70,6 +70,66 @@
     --secondary: #1d7874;
     --accent: #588077;
     --highlight: #ed4c4e;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom3 {
+    --main-text: #ffb3b5;
+    --alternate-text: #000000;
+    --primary: #181437;
+    --secondary: #234482;
+    --accent: #a3484b;
+    --highlight: #6d9dc9;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom4 {
+    --main-text: #ffe6d9;
+    --alternate-text: #000000;
+    --primary: #300e21;
+    --secondary: #8c3135;
+    --accent: #c47e62;
+    --highlight: #de527a;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom5 {
+    --main-text: #ffffff;
+    --alternate-text: #000000;
+    --primary: #26231e;
+    --secondary: #2e4b36;
+    --accent: #5f725d;
+    --highlight: #529c66;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom6 {
+    --main-text: #20527f;
+    --alternate-text: #000000;
+    --primary: #719cc7;
+    --secondary: #ffffff;
+    --accent: #dde7f2;
+    --highlight: #ffffff;
 
     background: radial-gradient(
       ellipse at 5% 5%,
