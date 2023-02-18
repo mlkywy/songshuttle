@@ -10,7 +10,7 @@ const Documentation = () => {
           style={{ height: `calc(100vh - 10rem)` }}
         >
           <div className="max-h-full text-main">
-            <Link to="/">
+            <Link to="/songshuttle/">
               <h1 className="px-2 py-4 text-md font-bitter font-extrabold text-highlight items-center flex gap-1">
                 <ArrowUUpLeft size="1.5rem" /> okay, now take me back!
               </h1>
