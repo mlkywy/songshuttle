@@ -23,7 +23,7 @@ The `.env` file should be in the root directory of the project. Here's an exampl
 ```
 REACT_APP_CLIENT_ID = "your client ID here"
 REACT_APP_CLIENT_SECRET = "your client secret here"
-REACT_APP_REDIRECT_URI = "http://localhost:3000"
+REACT_APP_REDIRECT_URI = "http://localhost:3000/songshuttle/"
 ```
 
 Run `npm i` to install dependencies, and then run `npm start` to boot up the React application.
