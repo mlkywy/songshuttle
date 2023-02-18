@@ -12,7 +12,7 @@ const Documentation = () => {
           <div className="max-h-full text-main">
             <Link to="/">
               <h1 className="px-2 py-4 text-md font-bitter font-extrabold text-highlight items-center flex gap-1">
-                <ArrowUUpLeft size="1.5rem" /> don't care, take me back!
+                <ArrowUUpLeft size="1.5rem" /> okay, now take me back!
               </h1>
             </Link>
 
