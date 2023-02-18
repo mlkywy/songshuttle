@@ -21,9 +21,9 @@
   .theme-dark {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #211829;
+    --primary: #111021;
     --secondary: #38334f;
-    --accent: #5c527f;
+    --accent: #584d80;
     --highlight: #686da1;
 
     background: radial-gradient(
