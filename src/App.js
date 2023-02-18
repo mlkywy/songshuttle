@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Context
 import { ThemeContext } from "./context/ThemeContext";
@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import Documentation from "./pages/Documentation";
+
 import { PlaylistProvider } from "./context/PlaylistContext";
 import { SearchProvider } from "./context/SearchContext";
 import { AudioProvider } from "./context/AudioContext";
@@ -52,7 +54,11 @@ function App() {
               <BrowserRouter>
                 <div className={themeDictionary[theme]}>
                   <Header />
-                  <Home />
+                  {/* <Home /> */}
+                  <Routes>
+                    <Route path="/" element={<Home />} exact />
+                    <Route path="/documentation" element={<Documentation />} />
+                  </Routes>
                   <Footer />
                 </div>
               </BrowserRouter>
