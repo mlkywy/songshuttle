@@ -13,6 +13,8 @@ const options = [
   { label: "blossom", value: "light" },
   { label: "dreamy", value: "custom1" },
   { label: "retro", value: "custom2" },
+  { label: "coral reef", value: "custom3" },
+  { label: "sunset", value: "custom4" },
 ];
 
 const Header = () => {

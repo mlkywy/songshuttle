@@ -43,6 +43,8 @@ function App() {
     light: "theme-light",
     custom1: "theme-custom1",
     custom2: "theme-custom2",
+    custom3: "theme-custom3",
+    custom4: "theme-custom4",
   };
 
   return (

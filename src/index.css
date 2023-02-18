@@ -51,8 +51,8 @@
   .theme-custom1 {
     --main-text: #ffffff;
     --alternate-text: #000000;
-    --primary: #473450;
-    --secondary: #895b78;
+    --primary: #3a2842;
+    --secondary: #8f5b7c;
     --accent: #b26d79;
     --highlight: #ffa3b3;
 
@@ -70,6 +70,36 @@
     --secondary: #1d7874;
     --accent: #588077;
     --highlight: #ed4c4e;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom3 {
+    --main-text: #ffb3b5;
+    --alternate-text: #000000;
+    --primary: #181437;
+    --secondary: #234482;
+    --accent: #a3484b;
+    --highlight: #6d9dc9;
+
+    background: radial-gradient(
+      ellipse at 5% 5%,
+      var(--secondary),
+      var(--primary)
+    );
+  }
+
+  .theme-custom4 {
+    --main-text: #ffe6d9;
+    --alternate-text: #000000;
+    --primary: #300e21;
+    --secondary: #8c3135;
+    --accent: #c47e62;
+    --highlight: #de527a;
 
     background: radial-gradient(
       ellipse at 5% 5%,
