@@ -16,6 +16,7 @@ In order to login to the application, you must have a Spotify developer account 
 - You can create a dev account [here](https://developer.spotify.com/).
 - Navigate to your [dashboard](https://developer.spotify.com/dashboard/applications) to find the client ID of your app.
 - Set your redirect uri(s) in your developer dashboard.
+- You will also need to change the routing in the application to match your redirect uri.
 
 The `.env` file should be in the root directory of the project. Here's an example:
 
