@@ -52,19 +52,16 @@ const Playlist = () => {
 
     let file = e.target.files[0];
 
-    if (file.size > 4000000)
-    {
+    if (file.size > 4000000) {
       setImage(null);
       setErrorText("Image must be less than 4 MB in size.");
     }
 
-    while (file.size < 4000000 && file.size > 100000)
-    {
+    while (file.size < 4000000 && file.size > 100000) {
       file = await compressImage(file, file.size);
     }
 
-    if (file.size <= 100000)
-    {
+    if (file.size <= 100000) {
       let base64 = await convertToBase64(file);
       base64 = base64.split("base64,")[1];
       setImage(base64);
