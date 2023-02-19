@@ -8,8 +8,8 @@ const UserPlaylistResults = ({ playlist }) => {
       <div className="flex items-center w-5/6">
         <img src={cover} alt="" className="w-12 h-12 mr-4" />
         <div className="flex flex-col">
-          <div className="font-bold text-primary text-sm py-1">{title}</div>
-          <div className="text-primary text-xs font-medium">{description}</div>
+          <div className="font-bold text-main text-sm py-1">{title}</div>
+          <div className="text-main text-xs font-medium">{description}</div>
         </div>
       </div>
     </div>

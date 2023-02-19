@@ -17,7 +17,7 @@ const UserPlaylist = () => {
     <div>
       <button onClick={getPlaylists}>Click me!</button>
       {playlists.length > 0 && (
-        <div className="playlist-dropdown">
+        <div className="max-h-64 overflow-y-auto">
           {playlists.map((playlist) => (
             <UserPlaylistResults key={playlist.id} playlist={playlist} />
           ))}
