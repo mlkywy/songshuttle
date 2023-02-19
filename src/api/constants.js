@@ -4,6 +4,8 @@ export const SPOTIFY_SCOPES = {
   PLAYLIST_MODIFY_PRIVATE: "playlist-modify-private",
   PLAYLIST_MODIFY_PUBLIC: "playlist-modify-public",
   UGC_IMAGE_UPLOAD: "ugc-image-upload",
+  PLAYLIST_READ_PRIVATE: "playlist-read-private",
+  PLAYLIST_READ_COLLABORATIVE: "playlist-read-collaborative",
 };
 
 export const SPOTIFY_ENDPOINTS = {

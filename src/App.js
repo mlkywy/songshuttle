@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Documentation from "./pages/Documentation";
+import Playlists from "./pages/Playlists";
 
 import { PlaylistProvider } from "./context/PlaylistContext";
 import { SearchProvider } from "./context/SearchContext";
@@ -65,6 +66,7 @@ function App() {
                       path="/songshuttle/documentation"
                       element={<Documentation />}
                     />
+                    <Route path="/songshuttle/update" element={<Playlists />} />
                   </Routes>
                   <Footer />
                 </div>

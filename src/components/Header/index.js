@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { RocketLaunch } from "phosphor-react";
+import { RocketLaunch, Info } from "phosphor-react";
 
 import Dropdown from "../Dropdown";
 import { Primary, NavLink } from "../Buttons";
@@ -39,7 +39,12 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
-        <NavLink option="how it works" link="/songshuttle/documentation" />
+        <NavLink option="update playlist" link="/songshuttle/update" />
+        <div>
+          <Link to="/songshuttle/documentation">
+            <Info size="2rem" />
+          </Link>
+        </div>
         <div>
           <Dropdown options={options} />
         </div>
