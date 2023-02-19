@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ArrowClockwise } from "phosphor-react";
+import { Link } from "react-router-dom";
+import { ArrowClockwise, ArrowUUpLeft } from "phosphor-react";
 import { InvertedOptionButton } from "../Buttons";
 import getUsersPlaylists from "../../api/getUsersPlaylists";
 import useUser from "../../hooks/useUser";
@@ -18,7 +19,7 @@ const UserPlaylist = () => {
   return (
     <div className="flex justify-center">
       <div>
-        <div className="p-2">
+        <div className="p-2 flex flex-row gap-2">
           <InvertedOptionButton
             option={
               <>
@@ -27,6 +28,15 @@ const UserPlaylist = () => {
             }
             onClick={getPlaylists}
           />
+          <Link to="/songshuttle/">
+            <InvertedOptionButton
+              option={
+                <>
+                  <ArrowUUpLeft size="1.3rem" /> go back to create playlist
+                </>
+              }
+            />
+          </Link>
         </div>
 
         {playlists.length > 0 && (
