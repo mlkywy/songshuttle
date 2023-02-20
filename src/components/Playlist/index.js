@@ -84,13 +84,13 @@ const Playlist = () => {
   const handleCreatePlaylist = async (
     title,
     description,
-    songIds,
+    songUris,
     visibility
   ) => {
     console.log("CREATING PLAYLIST!");
     setErrorText(null);
 
-    if (title === null || songIds.length === 0) {
+    if (title === null || songUris.length === 0) {
       return setErrorText(
         "Make sure the title field is not empty and include at least one song!"
       );
@@ -114,7 +114,7 @@ const Playlist = () => {
     setUrl(`https://open.spotify.com/playlist/${id}`);
 
     // Add songs to the playlist
-    await addTracksToPlaylist(token, id, songIds);
+    await addTracksToPlaylist(token, id, songUris);
 
     // Add image to playlist (if exists)
     if (image && id) {
@@ -126,8 +126,8 @@ const Playlist = () => {
     playlistId,
     title,
     description,
-    addedSongIds,
-    removedSongIds,
+    addedSongUris,
+    removedSongUris,
     visibility
   ) => {
     console.log("UPDATING PLAYLIST!");
@@ -135,7 +135,7 @@ const Playlist = () => {
 
     if (
       title === null ||
-      (addedSongIds.length === 0 && removedSongIds.length === 0)
+      (addedSongUris.length === 0 && removedSongUris.length === 0)
     ) {
       return setErrorText(
         "Make sure the title field is not empty and make changes to this playlist!"
@@ -161,13 +161,13 @@ const Playlist = () => {
     console.log(details);
 
     // Remove songs from playlist
-    if (removedSongIds.length > 0) {
-      await removeTracksFromPlaylist(token, id, removedSongIds);
+    if (removedSongUris.length > 0) {
+      await removeTracksFromPlaylist(token, id, removedSongUris);
     }
 
     // Add songs to the playlist
-    if (addedSongIds.length > 0) {
-      await addTracksToPlaylist(token, id, addedSongIds);
+    if (addedSongUris.length > 0) {
+      await addTracksToPlaylist(token, id, addedSongUris);
     }
 
     // Update image to playlist (if exists)
