@@ -26,7 +26,7 @@ const Header = () => {
 
   const createNewPlaylist = () => {
     updatePlaylistFlag(false);
-    window.location.reload();
+    window.location.href = "/songshuttle/";
   };
 
   return (
@@ -46,8 +46,10 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
+
         <NavLink option="new playlist" onClick={createNewPlaylist} />
         <NavLink option="update playlist" link="/songshuttle/update" />
+
         <div>
           <Link to="/songshuttle/documentation">
             <Info size="2rem" />
