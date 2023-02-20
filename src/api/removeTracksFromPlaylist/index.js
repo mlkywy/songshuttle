@@ -6,6 +6,7 @@ import getPlaylistTracks from "../getPlaylistTracks";
 const removeTracksFromPlaylist = async (auth, playlistId, uris) => {
   const headers = { Authorization: `Bearer ${auth}` };
   const params = { playlistId: playlistId };
+  const trackPositions = [];
   const tracks = [];
 
   try {
@@ -13,20 +14,22 @@ const removeTracksFromPlaylist = async (auth, playlistId, uris) => {
     const allTracks = await getPlaylistTracks(auth, playlistId);
 
     // Find the position of each track within the playlist
-    allTracks.forEach((item, index) => {
-      const uri = item.uri;
-      if (uris.includes(uri)) {
-        let trackToDelete = {
-          uri: uri,
-          positions: [index],
-        };
-
-        // If this track has not already been added to the tracks array, add it
-        if (!tracks.some((track) => track.uri === uri)) {
-          tracks.push(trackToDelete);
+    for (const uri of uris) {
+      const positions = [];
+      const uriOccurrences = uris.filter((u) => u === uri).length;
+      for (
+        let i = 0;
+        i < allTracks.length && positions.length < uriOccurrences;
+        i++
+      ) {
+        if (allTracks[i].uri === uri) {
+          positions.push(i);
         }
       }
-    });
+      tracks.push({ uri, positions });
+    }
+
+    console.log(tracks);
 
     // Send the request to remove the tracks by their position
     const { data } = await axios.delete(
@@ -39,6 +42,7 @@ const removeTracksFromPlaylist = async (auth, playlistId, uris) => {
         data: { tracks },
       }
     );
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
