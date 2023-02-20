@@ -31,13 +31,13 @@ const Header = () => {
 
   return (
     <div className="fixed w-full flex flex-row items-center justify-between text-main h-20 z-10 md:px-32 lg:px-64">
-      <Link to="/songshuttle/">
-        <div className="text-3xl font-bitter font-bold flex flex-row items-center gap-1">
-          <RocketLaunch size="2.5rem" /> songshuttle
-        </div>
-      </Link>
+      <div className="flex flex-row items-center gap-8">
+        <Link to="/songshuttle/">
+          <div className="text-3xl font-bitter font-bold flex flex-row items-center gap-1">
+            <RocketLaunch size="2.5rem" /> songshuttle
+          </div>
+        </Link>
 
-      <div className="flex flex-row items-center gap-5 justify-between">
         {!token ? (
           <Primary
             option="login to spotify"
@@ -46,7 +46,9 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
+      </div>
 
+      <div className="flex flex-row items-center gap-5 justify-end">
         <NavLink option="new playlist" onClick={createNewPlaylist} />
         <NavLink option="update playlist" link="/songshuttle/update" />
 
