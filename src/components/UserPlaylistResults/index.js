@@ -10,8 +10,8 @@ const UserPlaylistResults = ({ playlist }) => {
   const title = playlist.name;
   const description = playlist.description;
 
+  const { userId, token } = useUser();
   const {
-    setSongs,
     addToPlaylist,
     updatePlaylistId,
     updateTitle,
@@ -19,15 +19,12 @@ const UserPlaylistResults = ({ playlist }) => {
     updatePlaylistFlag,
     clearPlaylist,
   } = usePlaylist();
-  const { userId, token } = useUser();
 
   const setTracks = async () => {
     clearPlaylist();
 
     const songs = await getPlaylistTracks(token, id);
     songs.forEach((song) => addToPlaylist(song));
-    console.log(title);
-    console.log(description);
 
     updatePlaylistId(id);
     updateTitle(title);
