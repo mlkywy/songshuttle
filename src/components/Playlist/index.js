@@ -27,7 +27,6 @@ import { useAudio } from "../../context/AudioContext";
 import useUser from "../../hooks/useUser";
 
 const Playlist = () => {
-  const [visibility, setVisibility] = useState(false);
   const { userId, token } = useUser();
   const { resetAudio } = useAudio();
   const { setTracks } = useSearch();
@@ -45,6 +44,8 @@ const Playlist = () => {
     addedSongList,
     removedSongList,
     clearUpdatedPlaylist,
+    playlistVisibility,
+    setPlaylistVisibility,
   } = usePlaylist();
 
   const [image, setImage] = useState(null);
@@ -135,20 +136,13 @@ const Playlist = () => {
     setUrl(null);
     setErrorText(null);
 
-    if (
-      title === null ||
-      (addedSongUris.length === 0 && removedSongUris.length === 0)
-    ) {
+    if (playlistId === null) {
       return setErrorText(
-        "Make sure the title field is not empty and make changes to this playlist! It's also possible that this playlist no longer exists; try refreshing your playlist list."
+        "It's possible that this playlist no longer exists; if this error persists, try refreshing your playlist list."
       );
     }
 
     const id = playlistId;
-
-    if (!id) {
-      return setErrorText("Uh oh... something went wrong!");
-    }
 
     setUrl(`https://open.spotify.com/playlist/${id}`);
 
@@ -235,7 +229,7 @@ const Playlist = () => {
             <OptionButton
               option={
                 <>
-                  {visibility ? (
+                  {playlistVisibility ? (
                     <CheckSquare size="1.3rem" />
                   ) : (
                     <Square size="1.3rem" />
@@ -244,7 +238,7 @@ const Playlist = () => {
                 </>
               }
               onClick={() => {
-                setVisibility(!visibility);
+                setPlaylistVisibility(!playlistVisibility);
               }}
             />
             <CreateButton
@@ -262,13 +256,13 @@ const Playlist = () => {
                       playlistDescription,
                       addedSongList.map((song) => `spotify:track:${song.id}`),
                       removedSongList.map((song) => `spotify:track:${song.id}`),
-                      visibility
+                      playlistVisibility
                     )
                   : handleCreatePlaylist(
                       playlistTitle,
                       playlistDescription,
                       songList.map((song) => `spotify:track:${song.id}`),
-                      visibility
+                      playlistVisibility
                     )
               }
             />

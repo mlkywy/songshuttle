@@ -11,6 +11,7 @@ export const PlaylistProvider = ({ children }) => {
   const [addedSongList, setAddedSongList] = useState([]);
   const [removedSongList, setRemovedSongList] = useState([]);
   const [playlistId, setPlaylistId] = useState(null);
+  const [playlistVisibility, setPlaylistVisibility] = useState(false);
 
   const updateTitle = (title) => setPlaylistTitle(title);
   const updateDescription = (description) =>
@@ -37,6 +38,9 @@ export const PlaylistProvider = ({ children }) => {
     setAddedSongList([]);
     setRemovedSongList([]);
   };
+
+  const makePlaylistVisible = (playlistVisibility) =>
+    setPlaylistVisibility(playlistVisibility);
 
   return (
     <PlaylistContext.Provider
@@ -67,6 +71,9 @@ export const PlaylistProvider = ({ children }) => {
         removeFromExistingPlaylist,
         clearPlaylist,
         clearUpdatedPlaylist,
+        playlistVisibility,
+        setPlaylistVisibility,
+        makePlaylistVisible,
       }}
     >
       {children}

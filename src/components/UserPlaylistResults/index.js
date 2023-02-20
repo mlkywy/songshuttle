@@ -9,6 +9,7 @@ const UserPlaylistResults = ({ playlist }) => {
   const cover = playlist.images[0]?.url;
   const title = playlist.name;
   const description = playlist.description;
+  const isVisible = playlist.public;
 
   const { userId, token } = useUser();
   const {
@@ -17,6 +18,7 @@ const UserPlaylistResults = ({ playlist }) => {
     updateTitle,
     updateDescription,
     updatePlaylistFlag,
+    makePlaylistVisible,
     clearPlaylist,
   } = usePlaylist();
 
@@ -29,6 +31,7 @@ const UserPlaylistResults = ({ playlist }) => {
     updatePlaylistId(id);
     updateTitle(title);
     updateDescription(description);
+    makePlaylistVisible(isVisible);
     updatePlaylistFlag(true);
   };
 
