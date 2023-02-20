@@ -14,6 +14,7 @@ const UserPlaylist = () => {
     const data = await getUsersPlaylists(token);
     const playlists = data.items.filter((item) => item.owner.id === userId);
     setPlaylists(playlists);
+    console.log(playlists);
   };
 
   return (

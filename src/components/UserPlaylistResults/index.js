@@ -1,9 +1,21 @@
 import { Pencil } from "phosphor-react";
+import { usePlaylist } from "../../context/PlaylistContext";
+import getPlaylistTracks from "../../api/getPlaylistTracks";
+import useUser from "../../hooks/useUser";
 
 const UserPlaylistResults = ({ playlist }) => {
+  const id = playlist.id;
   const cover = playlist.images[0]?.url;
   const title = playlist.name;
   const description = playlist.description;
+
+  const { addToPlaylist, setPlaylistTitle } = usePlaylist();
+  const { userId, token } = useUser();
+
+  const setTracks = async () => {
+    const songs = await getPlaylistTracks(token, id);
+    songs.forEach((song) => addToPlaylist(song));
+  };
 
   return (
     <div className="p-4 border-b border-primary flex items-center justify-between gap-2">
@@ -18,6 +30,7 @@ const UserPlaylistResults = ({ playlist }) => {
         <Pencil
           size="1.5rem"
           className="text-main hover:text-primary cursor-pointer"
+          onClick={setTracks}
         />
       </div>
     </div>

@@ -17,6 +17,7 @@ import PlaylistTrack from "../PlaylistTrack";
 import getRecommendations from "../../api/getRecommendations";
 import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
+import removeTracksFromPlaylist from "../../api/removeTracksFromPlaylist";
 import addCustomPlaylistCover from "../../api/addCustomPlaylistCover";
 
 import { usePlaylist } from "../../context/PlaylistContext";
@@ -38,6 +39,8 @@ const Playlist = () => {
     setPlaylistTitle,
     playlistDescription,
     setPlaylistDescription,
+    updatingPlaylist,
+    setUpdatingPlaylist,
   } = usePlaylist();
 
   const [image, setImage] = useState(null);
@@ -107,6 +110,45 @@ const Playlist = () => {
 
     // Add songs to the playlist
     await addTracksToPlaylist(token, id, songIds);
+
+    // Add image to playlist (if exists)
+    if (image && id) {
+      await addCustomPlaylistCover(token, id, image);
+    }
+  };
+
+  const handleUpdatePlaylist = async (
+    playlistId,
+    title,
+    description,
+    addedSongIds,
+    deletedSongIds,
+    visibility
+  ) => {
+    setErrorText(null);
+
+    if (
+      title === null ||
+      (addedSongIds.length === 0 && deletedSongIds.length === 0)
+    ) {
+      return setErrorText(
+        "Make sure the title field is not empty and make changes to this playlist!"
+      );
+    }
+
+    const id = playlistId;
+
+    if (!id) {
+      return setErrorText("Uh oh... something went wrong!");
+    }
+
+    setUrl(`https://open.spotify.com/playlist/${id}`);
+
+    // Remove songs from playlist
+    await removeTracksFromPlaylist(token, id, deletedSongIds);
+
+    // Add songs to the playlist
+    await addTracksToPlaylist(token, id, addedSongIds);
 
     // Add image to playlist (if exists)
     if (image && id) {

@@ -23,4 +23,8 @@ export const SPOTIFY_ENDPOINTS = {
   ADD_CUSTOM_PLAYLIST_COVER:
     "https://api.spotify.com/v1/playlists/:playlistId/images",
   GET_USERS_PLAYLISTS: "https://api.spotify.com/v1/me/playlists",
+  REMOVE_TRACKS_FROM_PLAYLIST:
+    "https://api.spotify.com/v1/playlists/:playlistId/tracks",
+  GET_PLAYLIST_TRACKS:
+    "https://api.spotify.com/v1/playlists/:playlistId/tracks",
 };
