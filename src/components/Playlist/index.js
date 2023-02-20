@@ -19,6 +19,7 @@ import createPlaylist from "../../api/createPlaylist";
 import addTracksToPlaylist from "../../api/addTracksToPlaylist";
 import removeTracksFromPlaylist from "../../api/removeTracksFromPlaylist";
 import addCustomPlaylistCover from "../../api/addCustomPlaylistCover";
+import updatePlaylistDetails from "../../api/updatePlaylistDetails";
 
 import { usePlaylist } from "../../context/PlaylistContext";
 import { useSearch } from "../../context/SearchContext";
@@ -40,7 +41,10 @@ const Playlist = () => {
     playlistDescription,
     setPlaylistDescription,
     updatingPlaylist,
-    setUpdatingPlaylist,
+    playlistId,
+    addedSongList,
+    removedSongList,
+    clearUpdatedPlaylist,
   } = usePlaylist();
 
   const [image, setImage] = useState(null);
@@ -83,6 +87,7 @@ const Playlist = () => {
     songIds,
     visibility
   ) => {
+    console.log("CREATING PLAYLIST!");
     setErrorText(null);
 
     if (title === null || songIds.length === 0) {
@@ -122,14 +127,15 @@ const Playlist = () => {
     title,
     description,
     addedSongIds,
-    deletedSongIds,
+    removedSongIds,
     visibility
   ) => {
+    console.log("UPDATING PLAYLIST!");
     setErrorText(null);
 
     if (
       title === null ||
-      (addedSongIds.length === 0 && deletedSongIds.length === 0)
+      (addedSongIds.length === 0 && removedSongIds.length === 0)
     ) {
       return setErrorText(
         "Make sure the title field is not empty and make changes to this playlist!"
@@ -144,16 +150,36 @@ const Playlist = () => {
 
     setUrl(`https://open.spotify.com/playlist/${id}`);
 
+    // Update playlist details
+    let details = await updatePlaylistDetails(
+      token,
+      id,
+      title,
+      description,
+      visibility
+    );
+    console.log(details);
+
     // Remove songs from playlist
-    await removeTracksFromPlaylist(token, id, deletedSongIds);
+    if (removedSongIds.length > 0) {
+      let remove = await removeTracksFromPlaylist(token, id, removedSongIds);
+      console.log(removedSongIds);
+      console.log(remove);
+    }
 
     // Add songs to the playlist
-    await addTracksToPlaylist(token, id, addedSongIds);
+    if (addedSongIds.length > 0) {
+      let add = await addTracksToPlaylist(token, id, addedSongIds);
+      console.log(addedSongIds);
+      console.log(add);
+    }
 
-    // Add image to playlist (if exists)
+    // Update image to playlist (if exists)
     if (image && id) {
       await addCustomPlaylistCover(token, id, image);
     }
+
+    clearUpdatedPlaylist();
   };
 
   const handleRecs = async (songId) => {
@@ -178,6 +204,7 @@ const Playlist = () => {
           <input
             type="text"
             placeholder="enter playlist title..."
+            value={playlistTitle ? playlistTitle : ""}
             onChange={(e) => setPlaylistTitle(e.target.value)}
             className="w-full px-2 py-3 text-md font-semibold placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
           />
@@ -192,6 +219,7 @@ const Playlist = () => {
         <textarea
           type="text"
           placeholder="enter playlist description..."
+          value={playlistDescription ? playlistDescription : ""}
           onChange={(e) => setPlaylistDescription(e.target.value)}
           className="resize-none h-10 w-full px-2 text-sm font-medium placeholder-primary text-main focus:outline-none focus:shadow-outline bg-transparent"
         />
@@ -231,16 +259,26 @@ const Playlist = () => {
             <CreateButton
               option={
                 <>
-                  <PaperPlaneTilt size="1.5rem" /> create playlist
+                  <PaperPlaneTilt size="1.5rem" />{" "}
+                  {updatingPlaylist ? "update playlist" : "create playlist"}
                 </>
               }
               onClick={() =>
-                handleCreatePlaylist(
-                  playlistTitle,
-                  playlistDescription,
-                  songList.map((song) => `spotify:track:${song.id}`),
-                  visibility
-                )
+                updatingPlaylist
+                  ? handleUpdatePlaylist(
+                      playlistId,
+                      playlistTitle,
+                      playlistDescription,
+                      addedSongList.map((song) => `spotify:track:${song.id}`),
+                      removedSongList.map((song) => `spotify:track:${song.id}`),
+                      visibility
+                    )
+                  : handleCreatePlaylist(
+                      playlistTitle,
+                      playlistDescription,
+                      songList.map((song) => `spotify:track:${song.id}`),
+                      visibility
+                    )
               }
             />
           </div>

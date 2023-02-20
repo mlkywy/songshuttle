@@ -27,4 +27,5 @@ export const SPOTIFY_ENDPOINTS = {
     "https://api.spotify.com/v1/playlists/:playlistId/tracks",
   GET_PLAYLIST_TRACKS:
     "https://api.spotify.com/v1/playlists/:playlistId/tracks",
+  UPDATE_PLAYLIST_DETAILS: "https://api.spotify.com/v1/playlists/:playlistId",
 };

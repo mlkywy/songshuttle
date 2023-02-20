@@ -2,21 +2,26 @@ import axios from "axios";
 import { SPOTIFY_ENDPOINTS } from "../constants";
 import convertEndpointParams from "../../utils/convertEndpointParams";
 
-const removeTracksFromPlaylist = async (auth, playlistId, songIds) => {
+const updatePlaylistDetails = async (
+  auth,
+  playlistId,
+  title,
+  description,
+  visibility
+) => {
   const headers = { Authorization: `Bearer ${auth}` };
   const params = { playlistId: playlistId };
 
-  console.log(auth, playlistId, songIds);
-
   try {
-    const { data } = await axios.delete(
-      convertEndpointParams(
-        SPOTIFY_ENDPOINTS.REMOVE_TRACKS_FROM_PLAYLIST,
-        params
-      ),
+    const { data } = await axios.put(
+      convertEndpointParams(SPOTIFY_ENDPOINTS.UPDATE_PLAYLIST_DETAILS, params),
+      {
+        name: title,
+        description: description,
+        public: visibility,
+      },
       {
         headers,
-        data: { uris: songIds },
       }
     );
     return data;
@@ -25,4 +30,4 @@ const removeTracksFromPlaylist = async (auth, playlistId, songIds) => {
   }
 };
 
-export default removeTracksFromPlaylist;
+export default updatePlaylistDetails;

@@ -33,7 +33,7 @@ const UserPlaylist = () => {
             <InvertedOptionButton
               option={
                 <>
-                  <ArrowUUpLeft size="1.3rem" /> go back to create playlist
+                  <ArrowUUpLeft size="1.3rem" /> go back to search
                 </>
               }
             />

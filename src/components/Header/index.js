@@ -6,6 +6,7 @@ import Dropdown from "../Dropdown";
 import { Primary, NavLink } from "../Buttons";
 
 import useUser from "../../hooks/useUser";
+import { usePlaylist } from "../../context/PlaylistContext";
 
 // Theme options
 const options = [
@@ -21,6 +22,12 @@ const options = [
 
 const Header = () => {
   const { token, redirectToAuthorization, logout } = useUser();
+  const { updatePlaylistFlag } = usePlaylist();
+
+  const createNewPlaylist = () => {
+    updatePlaylistFlag(false);
+    window.location.reload();
+  };
 
   return (
     <div className="fixed w-full flex flex-row items-center justify-between text-main h-20 z-10 md:px-32 lg:px-64">
@@ -39,6 +46,7 @@ const Header = () => {
         ) : (
           <Primary option="logout of spotify" onClick={logout} />
         )}
+        <NavLink option="new playlist" onClick={createNewPlaylist} />
         <NavLink option="update playlist" link="/songshuttle/update" />
         <div>
           <Link to="/songshuttle/documentation">

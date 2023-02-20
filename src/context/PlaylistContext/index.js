@@ -8,12 +8,34 @@ export const PlaylistProvider = ({ children }) => {
   const [playlistTitle, setPlaylistTitle] = useState(null);
   const [playlistDescription, setPlaylistDescription] = useState(null);
   const [updatingPlaylist, setUpdatingPlaylist] = useState(false);
+  const [addedSongList, setAddedSongList] = useState([]);
+  const [removedSongList, setRemovedSongList] = useState([]);
+  const [playlistId, setPlaylistId] = useState(null);
 
   const updateTitle = (title) => setPlaylistTitle(title);
-  const addToPlaylist = (song) => setSongList((prev) => [...prev, song]);
+  const updateDescription = (description) =>
+    setPlaylistDescription(description);
 
+  const addToPlaylist = (song) => setSongList((prev) => [...prev, song]);
   const removeFromPlaylist = (index) => {
     setSongList(songList.filter((song, i) => i !== index));
+  };
+
+  const addToExistingPlaylist = (song) =>
+    setAddedSongList((prev) => [...prev, song]);
+  const removeFromExistingPlaylist = (song) =>
+    setRemovedSongList((prev) => [...prev, song]);
+
+  const updatePlaylistFlag = (updatingPlaylist) =>
+    setUpdatingPlaylist(updatingPlaylist);
+
+  const updatePlaylistId = (playlistId) => setPlaylistId(playlistId);
+
+  const clearPlaylist = () => setSongList([]);
+
+  const clearUpdatedPlaylist = () => {
+    setAddedSongList([]);
+    setRemovedSongList([]);
   };
 
   return (
@@ -23,15 +45,28 @@ export const PlaylistProvider = ({ children }) => {
         setExpanded,
         songList,
         setSongList,
+        addedSongList,
+        setAddedSongList,
+        removedSongList,
+        setRemovedSongList,
         playlistTitle,
         setPlaylistTitle,
         playlistDescription,
         setPlaylistDescription,
         addToPlaylist,
         updateTitle,
+        updateDescription,
         removeFromPlaylist,
         updatingPlaylist,
         setUpdatingPlaylist,
+        updatePlaylistFlag,
+        playlistId,
+        setPlaylistId,
+        updatePlaylistId,
+        addToExistingPlaylist,
+        removeFromExistingPlaylist,
+        clearPlaylist,
+        clearUpdatedPlaylist,
       }}
     >
       {children}

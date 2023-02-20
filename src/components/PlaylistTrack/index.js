@@ -6,7 +6,13 @@ const PlaylistTrack = ({ song, index, handleRecs }) => {
   const cover = song?.album.images[0].url;
   const title = song?.name;
   const artist = song?.artists[0]?.name;
-  const { removeFromPlaylist } = usePlaylist();
+  const { updatingPlaylist, removeFromPlaylist, removeFromExistingPlaylist } =
+    usePlaylist();
+
+  const removeSongFromExistingPlaylist = (index, song) => {
+    removeFromPlaylist(index);
+    removeFromExistingPlaylist(song);
+  };
 
   return (
     <div className="p-4 border-b border-primary flex items-center justify-between gap-2">
@@ -27,7 +33,11 @@ const PlaylistTrack = ({ song, index, handleRecs }) => {
         <Trash
           size="1.5rem"
           className="text-main hover:text-primary cursor-pointer"
-          onClick={() => removeFromPlaylist(index)}
+          onClick={() =>
+            updatingPlaylist
+              ? removeSongFromExistingPlaylist(index, song)
+              : removeFromPlaylist(index)
+          }
         />
       </div>
     </div>

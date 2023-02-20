@@ -1,4 +1,5 @@
 import { Pencil } from "phosphor-react";
+import { Link } from "react-router-dom";
 import { usePlaylist } from "../../context/PlaylistContext";
 import getPlaylistTracks from "../../api/getPlaylistTracks";
 import useUser from "../../hooks/useUser";
@@ -9,12 +10,29 @@ const UserPlaylistResults = ({ playlist }) => {
   const title = playlist.name;
   const description = playlist.description;
 
-  const { addToPlaylist, setPlaylistTitle } = usePlaylist();
+  const {
+    setSongs,
+    addToPlaylist,
+    updatePlaylistId,
+    updateTitle,
+    updateDescription,
+    updatePlaylistFlag,
+    clearPlaylist,
+  } = usePlaylist();
   const { userId, token } = useUser();
 
   const setTracks = async () => {
+    clearPlaylist();
+
     const songs = await getPlaylistTracks(token, id);
     songs.forEach((song) => addToPlaylist(song));
+    console.log(title);
+    console.log(description);
+
+    updatePlaylistId(id);
+    updateTitle(title);
+    updateDescription(description);
+    updatePlaylistFlag(true);
   };
 
   return (
@@ -27,11 +45,13 @@ const UserPlaylistResults = ({ playlist }) => {
         </div>
       </div>
       <div className="flex flex-row gap-3">
-        <Pencil
-          size="1.5rem"
-          className="text-main hover:text-primary cursor-pointer"
-          onClick={setTracks}
-        />
+        <Link to="/songshuttle/">
+          <Pencil
+            size="1.5rem"
+            className="text-main hover:text-primary cursor-pointer"
+            onClick={setTracks}
+          />
+        </Link>
       </div>
     </div>
   );
