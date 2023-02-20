@@ -88,6 +88,7 @@ const Playlist = () => {
     visibility
   ) => {
     console.log("CREATING PLAYLIST!");
+    setUrl(null);
     setErrorText(null);
 
     if (title === null || songUris.length === 0) {
@@ -131,6 +132,7 @@ const Playlist = () => {
     visibility
   ) => {
     console.log("UPDATING PLAYLIST!");
+    setUrl(null);
     setErrorText(null);
 
     if (
@@ -138,7 +140,7 @@ const Playlist = () => {
       (addedSongUris.length === 0 && removedSongUris.length === 0)
     ) {
       return setErrorText(
-        "Make sure the title field is not empty and make changes to this playlist!"
+        "Make sure the title field is not empty and make changes to this playlist! It's also possible that this playlist no longer exists; try refreshing your playlist list."
       );
     }
 
@@ -151,14 +153,7 @@ const Playlist = () => {
     setUrl(`https://open.spotify.com/playlist/${id}`);
 
     // Update playlist details
-    let details = await updatePlaylistDetails(
-      token,
-      id,
-      title,
-      description,
-      visibility
-    );
-    console.log(details);
+    await updatePlaylistDetails(token, id, title, description, visibility);
 
     // Remove songs from playlist
     if (removedSongUris.length > 0) {
