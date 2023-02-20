@@ -162,16 +162,12 @@ const Playlist = () => {
 
     // Remove songs from playlist
     if (removedSongIds.length > 0) {
-      let remove = await removeTracksFromPlaylist(token, id, removedSongIds);
-      console.log(removedSongIds);
-      console.log(remove);
+      await removeTracksFromPlaylist(token, id, removedSongIds);
     }
 
     // Add songs to the playlist
     if (addedSongIds.length > 0) {
-      let add = await addTracksToPlaylist(token, id, addedSongIds);
-      console.log(addedSongIds);
-      console.log(add);
+      await addTracksToPlaylist(token, id, addedSongIds);
     }
 
     // Update image to playlist (if exists)
