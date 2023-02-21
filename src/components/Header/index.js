@@ -50,7 +50,7 @@ const Header = () => {
 
       <div className="flex flex-row items-center gap-5 justify-end">
         <NavLink option="new playlist" onClick={createNewPlaylist} />
-        <NavLink option="update playlist" link="/songshuttle/update" />
+        <NavLink option="your playlists" link="/songshuttle/update" />
 
         <div>
           <Link to="/songshuttle/documentation">
