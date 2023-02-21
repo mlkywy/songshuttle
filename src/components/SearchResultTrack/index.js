@@ -11,7 +11,13 @@ import { usePlaylist } from "../../context/PlaylistContext";
 
 const Track = ({ song, style, toggle, resetAudio, isPlaying }) => {
   const { album, name, artists } = song;
-  const { addToPlaylist } = usePlaylist();
+  const { updatingPlaylist, addToPlaylist, addToExistingPlaylist } =
+    usePlaylist();
+
+  const addSongToExistingPlaylist = (song) => {
+    addToPlaylist(song);
+    addToExistingPlaylist(song);
+  };
 
   return (
     <animated.div
@@ -54,7 +60,11 @@ const Track = ({ song, style, toggle, resetAudio, isPlaying }) => {
         <MusicNotesPlus
           size="1.5rem"
           className="text-highlight hover:text-main cursor-pointer"
-          onClick={() => addToPlaylist(song)}
+          onClick={() =>
+            updatingPlaylist
+              ? addSongToExistingPlaylist(song)
+              : addToPlaylist(song)
+          }
         />
       </div>
     </animated.div>

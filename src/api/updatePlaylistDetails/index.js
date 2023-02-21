@@ -2,19 +2,26 @@ import axios from "axios";
 import { SPOTIFY_ENDPOINTS } from "../constants";
 import convertEndpointParams from "../../utils/convertEndpointParams";
 
-const addTracksToPlaylist = async (auth, playlistId, songUris) => {
+const updatePlaylistDetails = async (
+  auth,
+  playlistId,
+  title,
+  description,
+  visibility
+) => {
   const headers = { Authorization: `Bearer ${auth}` };
   const params = { playlistId: playlistId };
 
   try {
-    const { data } = await axios.post(
-      convertEndpointParams(SPOTIFY_ENDPOINTS.ADD_TRACKS_TO_PLAYLIST, params),
+    const { data } = await axios.put(
+      convertEndpointParams(SPOTIFY_ENDPOINTS.UPDATE_PLAYLIST_DETAILS, params),
       {
-        uris: songUris,
+        name: title,
+        description: description,
+        public: visibility,
       },
       {
         headers,
-        params,
       }
     );
     return data;
@@ -23,4 +30,4 @@ const addTracksToPlaylist = async (auth, playlistId, songUris) => {
   }
 };
 
-export default addTracksToPlaylist;
+export default updatePlaylistDetails;

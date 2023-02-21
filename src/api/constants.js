@@ -4,6 +4,8 @@ export const SPOTIFY_SCOPES = {
   PLAYLIST_MODIFY_PRIVATE: "playlist-modify-private",
   PLAYLIST_MODIFY_PUBLIC: "playlist-modify-public",
   UGC_IMAGE_UPLOAD: "ugc-image-upload",
+  PLAYLIST_READ_PRIVATE: "playlist-read-private",
+  PLAYLIST_READ_COLLABORATIVE: "playlist-read-collaborative",
 };
 
 export const SPOTIFY_ENDPOINTS = {
@@ -20,4 +22,10 @@ export const SPOTIFY_ENDPOINTS = {
   GET_RECOMMENDATIONS: "https://api.spotify.com/v1/recommendations",
   ADD_CUSTOM_PLAYLIST_COVER:
     "https://api.spotify.com/v1/playlists/:playlistId/images",
+  GET_USERS_PLAYLISTS: "https://api.spotify.com/v1/me/playlists",
+  REMOVE_TRACKS_FROM_PLAYLIST:
+    "https://api.spotify.com/v1/playlists/:playlistId/tracks",
+  GET_PLAYLIST_TRACKS:
+    "https://api.spotify.com/v1/playlists/:playlistId/tracks",
+  UPDATE_PLAYLIST_DETAILS: "https://api.spotify.com/v1/playlists/:playlistId",
 };

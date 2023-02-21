@@ -100,6 +100,18 @@ export const OptionButton = (props) => {
   );
 };
 
+export const InvertedOptionButton = (props) => {
+  return (
+    <button
+      className="px-3 py-1 text-xs font-semibold text-main hover:text-primary bg-secondary hover:bg-transparent border-0 rounded-full focus:outline-none focus:shadow-outline flex flex-row gap-2 justify-center items-center"
+      type={props.type}
+      onClick={props.onClick}
+    >
+      {props.option}
+    </button>
+  );
+};
+
 export const ImageButton = (props) => {
   return (
     <label
