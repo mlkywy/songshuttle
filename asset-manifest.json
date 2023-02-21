@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/songshuttle/static/css/main.4cf0a497.css",
-    "main.js": "/songshuttle/static/js/main.e1675515.js",
+    "main.js": "/songshuttle/static/js/main.8cd189ec.js",
     "index.html": "/songshuttle/index.html",
     "main.4cf0a497.css.map": "/songshuttle/static/css/main.4cf0a497.css.map",
-    "main.e1675515.js.map": "/songshuttle/static/js/main.e1675515.js.map"
+    "main.8cd189ec.js.map": "/songshuttle/static/js/main.8cd189ec.js.map"
   },
   "entrypoints": [
     "static/css/main.4cf0a497.css",
-    "static/js/main.e1675515.js"
+    "static/js/main.8cd189ec.js"
   ]
 }
